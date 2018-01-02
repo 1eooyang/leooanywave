@@ -35,4 +35,9 @@ public class Playbean {
     public long getPosition() {
         return position;
     }
+
+    @Override
+    public String toString() {
+        return "Playbean : url =" + getUrl() + " status =" + getStatus() + " position = " + getPosition();
+    }
 }

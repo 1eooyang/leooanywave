@@ -41,6 +41,11 @@
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityTheme.Full" />
+        <activity
+            android:name=".activity.LiveDetailActivity2"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme.Full" />
         <activity android:name=".activity.LoginActivity" />
         <activity
             android:name=".activity.WifiActivity"

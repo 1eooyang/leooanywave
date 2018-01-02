@@ -337,7 +337,7 @@ public class HomeActivity extends Activity {
                 currentweek = week - 2;
                 break;
         }
-        App.startActivityParams(LiveDetailActivity.class, listBeen.get(i).getId(), listBeen.get(i).getPlayUrl());
+        App.startActivityParams(LiveDetailActivity2.class, listBeen.get(i).getId(), listBeen.get(i).getPlayUrl());
     }
 
     @Override

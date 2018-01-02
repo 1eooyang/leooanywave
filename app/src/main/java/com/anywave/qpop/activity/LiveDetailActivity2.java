@@ -17,10 +17,10 @@ import com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer;
 import com.anywave.qpop.App;
 import com.anywave.qpop.R;
 import com.anywave.qpop.adapter.TvDetialContentAdapter;
+import com.anywave.qpop.adapter.TvDetialContentAdapter2;
 import com.anywave.qpop.adapter.TvDetialDayAdapter;
-import com.anywave.qpop.bean.HK2List;
+import com.anywave.qpop.bean.HkList;
 import com.anywave.qpop.bean.Playbean;
-import com.anywave.qpop.event.WifiStateEvent;
 import com.anywave.qpop.http.Constants;
 import com.anywave.qpop.utils.Util;
 import com.google.gson.Gson;
@@ -45,10 +45,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class LiveDetailActivity extends AppCompatActivity {
+public class LiveDetailActivity2 extends AppCompatActivity {
 
-    HashMap<Integer, List<HK2List.DataBeanX.DataBean>> mapDataBean = new HashMap();
-    ;
+    HashMap<Integer,List<HkList.DataBeanX.DataBean>> mapDataBean = new HashMap();;
 
     @BindView(R.id.day_recyclerview)
     RecyclerView dayRecyclerview;
@@ -56,14 +55,14 @@ public class LiveDetailActivity extends AppCompatActivity {
 
 
     TvDetialDayAdapter dayAdapter;
-    TvDetialContentAdapter contentAdapter;
+     TvDetialContentAdapter2 contentAdapter;
     @BindView(R.id.live_back)
     ImageView liveBack;
     @BindView(R.id.play_btn)
     ImageView mPlayBtnView;
     @BindView(R.id.video_player_item_1)
     SuperVideoPlayer mSuperVideoPlayer;
-    private static final String TAG = "LiveDetailActivity";
+    private static final String TAG = "LiveDetailActivity2";
     int currentid = -1;
     String url;
     static int currentweek;
@@ -96,21 +95,16 @@ public class LiveDetailActivity extends AppCompatActivity {
 
 
     private boolean isSettingAdapter;
-    //private HomeKeyWatcher mHomeKeyWatcher;
-    private boolean pressedHome;
-    private int num;
 
     private void MoveToPosition(LinearLayoutManager manager, int n) {
         manager.scrollToPositionWithOffset(n, 0);
         manager.setStackFromEnd(true);
     }
 
-    private void play(final String u, long position) {
-
+    private void play(final String u,long position) {
         NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
 
-        TxVideoPlayerController controller = new TxVideoPlayerController(this, handler, u, position);
-        //controller.setNiceVideoPlayer();
+        TxVideoPlayerController controller = new TxVideoPlayerController(this,handler,u,position);
         if (App.not_native) {
             controller.showProgress(true);
             mNiceVideoPlayer.setPlayerType(NiceVideoPlayer.TYPE_IJK); // TYPE_IJKor NiceVideoPlayer.TYPE_NATIVE
@@ -127,14 +121,13 @@ public class LiveDetailActivity extends AppCompatActivity {
         params.width = mNiceVideoPlayer.getResources().getDisplayMetrics().widthPixels; // 宽度为屏幕宽度
         params.height = (int) (params.width * 9f / 16f);    // 高度为宽度的9/16
         mNiceVideoPlayer.setLayoutParams(params);
-        mNiceVideoPlayer.setVolume(10);
+        mNiceVideoPlayer.setVolume(5);
         mNiceVideoPlayer.setController(controller);
-        if (position > 0) {
+        if (position>0) {
             mNiceVideoPlayer.start(position);
         } else {
-            //if()
-            //  mNiceVideoPlayer.
             mNiceVideoPlayer.start(0);
+
         }
         App.isClicked = false;
     }
@@ -143,17 +136,6 @@ public class LiveDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.isLiveBackFromHome = true;
-        //   mHomeKeyWatcher = new HomeKeyWatcher(this);
-        //   mHomeKeyWatcher.setOnHomePressedListener(new HomeKeyWatcher.OnHomePressedListener() {
-        //  @Override
-        //   public void onHomePressed() {
-        //      pressedHome = true;
-        //   }
-        //     });
-        //  pressedHome = false;
-        //   mHomeKeyWatcher.startWatch();
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_live_detail);
@@ -166,10 +148,8 @@ public class LiveDetailActivity extends AppCompatActivity {
         App.not_native = false;
 
         currentid = getIntent().getIntExtra("id", -1);
-        System.out.println("leo currentid : " + currentid);
         url = getIntent().getStringExtra("url");
-        System.out.println("leo url : " + url);
-        liveUrl = url;
+        liveUrl=url;
 
         SimpleDateFormat dfDate = new SimpleDateFormat("EE");
         String day = dfDate.format(new Date());
@@ -199,16 +179,13 @@ public class LiveDetailActivity extends AppCompatActivity {
         });
 
         contentRecyclerview.setLayoutManager(new LinearLayoutManager(this));
-        contentAdapter = new TvDetialContentAdapter();
+        contentAdapter = new TvDetialContentAdapter2();
         contentRecyclerview.setAdapter(contentAdapter);
 
         TvDetialContentAdapter.clickBack = false;
         TvDetialContentAdapter.SelectNull();
-
         handler = new MyHandler(this);
-
-
-        play(url, 0l);
+        play(url,0l);
 
         getDay(currentweek);
 
@@ -263,8 +240,8 @@ public class LiveDetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String result) {
 
-                HK2List hkList = new Gson().fromJson(result, HK2List.class);
-                final List<HK2List.DataBeanX.DataBean> dataBeen = hkList.getData().getData();
+                HkList hkList = new Gson().fromJson(result, HkList.class);
+                final List<HkList.DataBeanX.DataBean> dataBeen = hkList.getData().getData();
 
 //                if (dataBeen.size() <= 0) {
 //                    mapivNull.put(day, false);
@@ -280,19 +257,13 @@ public class LiveDetailActivity extends AppCompatActivity {
 
                 Log.e(TAG, "run: " + dataBeen.size());
                 for (int i = 0; i < dataBeen.size(); i++) {
-//                            Log.e(TAG, "onSuccess: "+ dataBeen.get(i).getIsPlaying());
                     if (dataBeen.get(i).getIsPlaying() == 0) {
-//                                Log.e(TAG, "onSuccess: "+ dataBeen.get(i).getIsPlaying() );
                         if (i >= 2)
                             i = i - 2;
                         p[0] = i;
                         break;
                     }
                 }
-//                contentAdapter.setDate(App.context, dataBeen, day);
-//                contentAdapter.notifyDataSetChanged();
-//                contentRecyclerview.setAdapter(new TvDetialContentAdapter(App.context, dataBeen, day, null));
-//                contentRecyclerview.scrollToPosition( p[0]);
             }
 
             @Override
@@ -309,12 +280,12 @@ public class LiveDetailActivity extends AppCompatActivity {
         });
     }
 
-    public void getHk(final int id, final String date, final int day) {
+    public  void getHk(final int id, final String date, final int day) {
 
-        if (mapDataBean.get(day) != null) {
-            Log.e(TAG, "getHk:" + mapDataBean.get(day));
-            Log.e(TAG, "getHk:size" + mapDataBean.get(day).size());
-            List<HK2List.DataBeanX.DataBean> been = mapDataBean.get(day);
+        if (mapDataBean.get(day)!=null) {
+            Log.e(TAG, "getHk:"+mapDataBean.get(day) );
+            Log.e(TAG, "getHk:size"+mapDataBean.get(day).size() );
+            List<HkList.DataBeanX.DataBean> been = mapDataBean.get(day);
             if (been.size() <= 0) {
                 ivNull.setVisibility(View.VISIBLE);
                 contentRecyclerview.setVisibility(View.GONE);
@@ -322,93 +293,94 @@ public class LiveDetailActivity extends AppCompatActivity {
                 ivNull.setVisibility(View.GONE);
                 contentRecyclerview.setVisibility(View.VISIBLE);
 
-                int[] p = {0};
-                for (int i = 0; i < been.size(); i++) {
-                    if (been.get(i).getIsPlaying() == 0) {
-                        if (i >= 2)
-                            i = i - 2;
-                        p[0] = i;
-                        break;
-                    }
+             int[] p = {0};
+            for (int i = 0; i < been.size(); i++) {
+                if (been.get(i).getIsPlaying() == 0) {
+                    if (i >= 2)
+                        i = i - 2;
+                    p[0] = i;
+                    break;
                 }
+            }
 //            if (p[0]-6>=0)
 //                p[0] = p[0] - 6;
-                contentAdapter.setDate(App.context, been, day);
-                contentAdapter.notifyDataSetChanged();
+            contentAdapter.setDate(App.context, been, day);
+            contentAdapter.notifyDataSetChanged();
 
 //            contentRecyclerview.scrollToPosition(p[0]);
 
-                ((LinearLayoutManager) contentRecyclerview.getLayoutManager())
-                        .scrollToPositionWithOffset(p[0], 0);
-                Log.e(TAG, "getHk:p[0]" + p[0]);
+            ((LinearLayoutManager)contentRecyclerview.getLayoutManager())
+                    .scrollToPositionWithOffset(p[0], 0);
+                Log.e(TAG, "getHk:p[0]"+p[0] );
 
             }
-        } else {
+        }else {
 //        String url = "http://220.248.15.134:8887/hk/hklist?id=105&d=2017-10-12&pwd=testpwd";
 
-            RequestParams params = new RequestParams(Constants.hk + "?id=" + id + "&d=" + date + "&pwd=testpwd");
+        RequestParams params = new RequestParams(Constants.hk + "?id=" + id + "&d=" + date + "&pwd=testpwd");
 //        RequestParams params = new RequestParams(url);
-            params.setAsJsonContent(true);
+        params.setAsJsonContent(true);
 //        params.addHeader("content-type", "application/json");
-            x.http().get(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String result) {
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
 
 //                LinearLayoutManager lm = new LinearLayoutManager(App.context);
-//                        final LinearLayoutManager lm = new LinearLayoutManager(LiveDetailActivity.this);
-                    System.out.println("leo result : " + result);
-                    HK2List hkList = new Gson().fromJson(result, HK2List.class);
-                    final List<HK2List.DataBeanX.DataBean> dataBeen = hkList.getData().getData();
+//                        final LinearLayoutManager lm = new LinearLayoutManager(LiveDetailActivity2.this);
 
-                    mapDataBean.put(day, dataBeen);
-
-                    Log.e(TAG, dataBeen.size() + "onSuccess: " + result);
+                HkList hkList = new Gson().fromJson(result, HkList.class);
+                final List<HkList.DataBeanX.DataBean> dataBeen = hkList.getData().getData();
 
 
-                    if (dataBeen.size() <= 0) {
-                        mapivNull.put(day, false);
+                mapDataBean.put(day, dataBeen);
+
+                Log.e(TAG, dataBeen.size() + "onSuccess: " + result);
+
+
+                if (dataBeen.size() <= 0) {
+                    mapivNull.put(day, false);
 //                    if (day == currentweek)
-                        ivNull.setVisibility(View.VISIBLE);
-                    } else {
-                        mapivNull.put(day, true);
+                    ivNull.setVisibility(View.VISIBLE);
+                } else {
+                    mapivNull.put(day, true);
 //                    if (day == currentweek)
-                        ivNull.setVisibility(View.GONE);
-                    }
+                    ivNull.setVisibility(View.GONE);
+                }
 
 
-                    final int[] p = {0};
+                final int[] p = {0};
 
 
-                    Log.e(TAG, "run: " + dataBeen.size());
-                    for (int i = 0; i < dataBeen.size(); i++) {
+                Log.e(TAG, "run: " + dataBeen.size());
+                for (int i = 0; i < dataBeen.size(); i++) {
 //                            Log.e(TAG, "onSuccess: "+ dataBeen.get(i).getIsPlaying());
-                        if (dataBeen.get(i).getIsPlaying() == 0) {
+                    if (dataBeen.get(i).getIsPlaying() == 0) {
 //                                Log.e(TAG, "onSuccess: "+ dataBeen.get(i).getIsPlaying() );
-                            if (i >= 2)
-                                i = i - 2;
-                            p[0] = i;
+                        if (i >= 2)
+                            i = i - 2;
+                        p[0] = i;
 //                                if (dataBeen.size() >= 8) {
 //                                    MoveToPosition(lm, p[0]);
 //                                }
-                            break;
-                        }
+                        break;
                     }
+                }
 
 
 //                    contentAdapter = new TvDetialContentAdapter(App.context, dataBeen, day, null);
 
 
-                    contentAdapter.setDate(App.context, dataBeen, day);
-                    contentAdapter.notifyDataSetChanged();
+                contentAdapter.setDate(App.context, dataBeen, day);
+                contentAdapter.notifyDataSetChanged();
 
 //                contentRecyclerview.setAdapter(new TvDetialContentAdapter(App.context, dataBeen, day, null));
 //                contentRecyclerview.scrollToPosition(p[0]);
-                    ((LinearLayoutManager) contentRecyclerview.getLayoutManager())
-                            .scrollToPositionWithOffset(p[0], 0);
+                ((LinearLayoutManager)contentRecyclerview.getLayoutManager())
+                        .scrollToPositionWithOffset(p[0], 0);
 
-                    for (int i = 0; i < 7; i++) {
-                        if (i == day) {
-                            switch (i) {
+                for (int i = 0; i < 7; i++) {
+                    if (i == day) {
+                        switch (i) {
 
 //                            case 0:
 //
@@ -439,35 +411,35 @@ public class LiveDetailActivity extends AppCompatActivity {
 //                                contentRecyclerview6.setAdapter(new TvDetialContentAdapter(App.context, dataBeen, day, null));
 //                                contentRecyclerview6.scrollToPosition( p[0]);
 //                                break;
-                                default:
+                            default:
 
-                                    break;
-                            }
+                                break;
                         }
-
                     }
+
+                }
 
 //                                        contentRecyclerview.scrollToPosition( p[0]);
 
-                }
+            }
 
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
 
-                }
+            }
 
-                @Override
-                public void onCancelled(CancelledException cex) {
+            @Override
+            public void onCancelled(CancelledException cex) {
 
-                }
+            }
 
-                @Override
-                public void onFinished() {
+            @Override
+            public void onFinished() {
 
-                }
-            });
+            }
+        });
 
-        }
+    }
     }
 
 
@@ -476,57 +448,35 @@ public class LiveDetailActivity extends AppCompatActivity {
         super.onStart();
         if (contentAdapter != null)
             contentAdapter.notifyDataSetChanged();
+//        EventBus.getDefault().postSticky(1);
+//        play(url);
+
+
+        //hxp 11.6
+        if (mNiceVideoPlayer!=null)
+            mNiceVideoPlayer.start();
+
+//        if (!getConnectWifiSsid().contains("Qpop")){
+//            App.startActivity(WifiActivity.class);
+//        }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     @Override
     protected void onStop() {
-        // 在OnStop中是release还是suspend播放器，需要看是不是因为按了Home键
         super.onStop();
-
-        // if (pressedHome) {
-        if (App.IsWifiModel) {
-            NiceVideoPlayerManager.instance().suspendNiceVideoPlayer();
-
-        } else {
-            NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
-            //  App.isLiveBackFromHome = true;
-            System.out.println("leo LiveDetail Finish");
-            finish();
-        }
-
-      /*  } else {
-            NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
-        }*/
-        if (mNiceVideoPlayer != null) {
-            mNiceVideoPlayer.setVolume(0);
-        }
-
-        //  mHomeKeyWatcher.stopWatch();
-
-    }
-
-
-    @Override
-    protected void onRestart() {
-        pressedHome = false;
-      //  mHomeKeyWatcher.startWatch();
-
-        super.onRestart();
-        NiceVideoPlayerManager.instance().resumeNiceVideoPlayer();
-       /* if (mNiceVideoPlayer != null && mNiceVideoPlayer.isIdle()) {
-            mNiceVideoPlayer.start();
-        }*/
-        if (mNiceVideoPlayer != null) {
-            mNiceVideoPlayer.setVolume(10);
-        }
+        // 在onStop时释放掉播放器
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        // NiceVideoPlayerManager.instance().resumeNiceVideoPlayer();
-
         App.isCurrentApp = true;
     }
 
@@ -543,21 +493,19 @@ public class LiveDetailActivity extends AppCompatActivity {
         // 在全屏或者小窗口时按返回键要先退出全屏或小窗口，
         // 所以在Activity中onBackPress要交给NiceVideoPlayer先处理。
         if (NiceVideoPlayerManager.instance().onBackPressd()) return;
-        finish();
+        App.startActivity2(HomeActivity.class);
         // 在onStop时释放掉播放器
-        //  NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
-        App.isLiveBackFromHome = false;
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
         super.onBackPressed();
     }
 
 
     @OnClick(R.id.live_back)
     public void onViewClicked() {
-        App.isLiveBackFromHome = false;
         // 在全屏或者小窗口时按返回键要先退出全屏或小窗口，
         // 所以在Activity中onBackPress要交给NiceVideoPlayer先处理。
         if (NiceVideoPlayerManager.instance().onBackPressd()) return;
-
+        App.startActivity2(HomeActivity.class);
         // 在onStop时释放掉播放器
         NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
         finish();
@@ -570,67 +518,41 @@ public class LiveDetailActivity extends AppCompatActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void Event(final Playbean event) {
-        System.out.println("leo PlaybeanEvent : " + event.toString());
         App.currentbacktime = 0;
-        if (event.getUrl() == null || event.getUrl().trim().equals("")) {
-            play(this.liveUrl, 0);
+        if (event.getUrl()==null||event.getUrl().trim().equals("")) {
+            play(this.liveUrl,0);
         } else {
-            play(event.getUrl(), event.getPosition());
+            play(event.getUrl(),event.getPosition());
         }
-    }
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void WifiStateEvent(WifiStateEvent event) {
-
-        if (event.isStartConnectWifi()) {
-            // TODO: 2017/12/23/023  开始链接
-        } else {
-            //  NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
-
-            if (!event.isWifiConnect()) {
-                num++;
-                if (num == 3) {
-                    App.startActivity(this, WifiActivity.class);
-                    finish();
-                }
-            }
-        }
-
-    /*    App.currentbacktime = 0;
-        if (event.getUrl() == null || event.getUrl().trim().equals("")) {
-            play(this.liveUrl, 0);
-        } else {
-            play(event.getUrl(), event.getPosition());
-        }*/
     }
 
     /**
      *
      */
-    private static class MyHandler extends Handler {
+    private static class MyHandler extends Handler{
         //对Activity的弱引用
-        private final WeakReference<LiveDetailActivity> mActivity;
+        private final WeakReference<LiveDetailActivity2> mActivity;
 
-        public MyHandler(LiveDetailActivity activity) {
-            mActivity = new WeakReference<LiveDetailActivity>(activity);
+        public MyHandler(LiveDetailActivity2 activity){
+            mActivity = new WeakReference<LiveDetailActivity2>(activity);
         }
 
         @Override
         public void handleMessage(Message msg) {
-            LiveDetailActivity activity = mActivity.get();
-            if (activity == null) {
+            LiveDetailActivity2 activity = mActivity.get();
+            if(activity==null){
                 super.handleMessage(msg);
                 return;
             }
             switch (msg.what) {
                 case 1:
-                    Log.d("leo", "************************************");
-                    Log.d("leo", "replay");
-                    Log.d("leo", "************************************");
+                    Log.d("wliu","************************************");
+                    Log.d("wliu","replay");
+                    Log.d("wliu","************************************");
 
-                    String url = msg.getData().getString("url");
-                    long position = msg.getData().getLong("position");
-                    Playbean event = new Playbean(url, 1, position);
+                    String url =  msg.getData().getString("url");
+                    long position =  msg.getData().getLong("position");
+                    Playbean event = new Playbean(url,1,position);
                     EventBus.getDefault().post(event);
                     break;
                 case 2:

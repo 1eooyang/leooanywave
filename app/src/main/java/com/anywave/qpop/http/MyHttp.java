@@ -382,6 +382,7 @@ public class MyHttp {
                 if (wifiBodelBean.getCode().equals("200")) {
                     if (wifiBodelBean.getEcho().replace("echo", "").equals(String.valueOf(i))) {
                         App.IsWifiModel = wifiBodelBean.getMode().equals("1");
+                        System.out.println("leo isWifiModel = "+ App.IsWifiModel);
                     }
                 }
 
