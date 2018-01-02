@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+
+    <FrameLayout
+        android:layout_margin="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="即将到达"
+            android:textColor="#44000000"
+            android:textSize="17sp"
+            />
+
+    </FrameLayout>
+
+    <TextView
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="市六医院站"
+        android:textColor="#FF000000"
+        android:textSize="24sp"
+        />
+    <View
+        android:layout_marginTop="26dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFF5F5F5"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <TextView
+            android:id="@+id/back"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text=""
+            android:textColor="#FF9B9B9B"
+            android:textSize="17sp"
+            />
+
+
+
+        <TextView
+            android:id="@+id/tv_confirm"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text="确定"
+            android:textColor="#FF52CC9A"
+            android:textSize="17sp"
+            />
+    </RelativeLayout>
+
+
+
+</LinearLayout>
+
+

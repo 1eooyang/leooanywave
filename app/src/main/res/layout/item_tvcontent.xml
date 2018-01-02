@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:gravity="center_vertical"
+    android:padding="5dp"
+    android:layout_height="50dp">
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center"
+        android:layout_marginLeft="10dp"
+        android:textSize="15sp"
+        android:textColor="#333333"/>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:gravity="center_vertical"
+        android:layout_marginLeft="20dp"
+        android:textSize="13sp"
+        android:textColor="#333333"/>
+    
+    
+
+
+    <FrameLayout
+        android:layout_marginRight="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/cb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_back_lock"
+            android:textSize="15sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="@drawable/bg_tv_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#333333"
+            android:text="回看"
+            android:gravity="center"/>
+
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_live"
+            android:textSize="15sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="@drawable/bg_tv_shape_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="直播中"
+            android:gravity="center"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_liveing"
+            android:textSize="15sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="@drawable/bg_tv_shape_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:text="播放中"
+            android:gravity="center"/>
+
+
+
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_soon"
+            android:textSize="15sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="@drawable/bg_tv_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#44000000"
+            android:text="即将"
+            android:gravity="center"/>
+
+        <TextView
+            android:visibility="visible"
+            android:id="@+id/tv_zhibo"
+            android:textSize="15sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="@drawable/bg_tv_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:text="直播"
+            android:gravity="center"/>
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_back_lock_dis"
+            android:textSize="15sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="@drawable/bg_tv_shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#44000000"
+            android:text="回看"
+            android:gravity="center"/>
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

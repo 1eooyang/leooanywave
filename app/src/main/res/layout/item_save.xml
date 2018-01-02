@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:orientation="vertical" android:layout_width="match_parent"
+android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/ll_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/title"
+            android:layout_marginTop="27dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="詹皇+韦德+罗斯+勒夫 骑士豪阵放6年前什么水平?"
+            android:textColor="#FF000000"
+            android:textSize="17sp"
+            />
+        <FrameLayout
+            android:layout_marginTop="17dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#FFF5F5F5"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    >
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <ImageButton
+            android:id="@+id/my"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/home_icon_my_hint" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="50dp"
+            android:background="@drawable/home_img_logo_hint" />
+
+
+        <ImageButton
+            android:id="@+id/live"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="108dp"
+            android:background="@drawable/home_icon_notselect_live_hint" />
+
+        <ImageButton
+            android:id="@+id/news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/home_icon_notselect_news_hint" />
+
+        <ImageButton
+            android:id="@+id/wifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/wifi_hint" />
+    </RelativeLayout>
+
+    <FrameLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@drawable/nav_top_img_bg" />
+
+    <LinearLayout
+        android:layout_marginTop="100dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:layout_width="74dp"
+            android:layout_height="69dp"
+            android:src="@drawable/wifi_icon_wifiicon" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="21dp"
+            android:layout_marginTop="18dp"
+            android:text="请连接公交WiFi使用"
+            android:textColor="#FF000000"
+            android:textSize="15sp" />
+
+        <FrameLayout
+            android:layout_width="240dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="32dp"
+            android:background="#FF52CC9A">
+
+            <TextView
+                android:id="@+id/tv_connect"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="一键连接"
+                android:textColor="#FFFFFFFF"
+                android:textSize="15sp" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:layout_marginBottom="0dp"
+            android:src="@drawable/wifi_img_tips"
+            android:id="@+id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

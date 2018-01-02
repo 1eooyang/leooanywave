@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:suspend="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/my"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:clickable="false"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:background="@drawable/home_icon_my"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+
+            <ImageButton
+                android:clickable="false"
+                android:id="@+id/ib_logo"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="50dp"
+                android:background="@drawable/home_img_logo_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+
+
+
+        <LinearLayout
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:id="@+id/ll_live"
+            android:layout_marginRight="98dp"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <!--android:checked="true"-->
+            <CheckBox
+                android:checked="true"
+                android:clickable="false"
+                android:id="@+id/live"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                style="@style/CustomCheckboxLive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/point_live"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/select_icon_point"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:id="@+id/ll_news"
+            android:layout_marginRight="52dp"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <CheckBox
+                android:clickable="false"
+                android:id="@+id/news"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+
+                style="@style/CustomCheckboxNews"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/point_news"
+                android:visibility="invisible"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/select_icon_point"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_wifi"
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            android:paddingBottom="6dp"
+            android:paddingTop="6dp"
+            android:layout_marginRight="8dp"
+            android:orientation="vertical"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:clickable="false"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/wifi" />
+
+            <ImageView
+                android:clickable="false"
+                android:visibility="invisible"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/select_icon_point"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:layout_below="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@drawable/nav_top_img_bg"
+        android:id="@+id/frameLayout" />
+
+    <FrameLayout
+
+        android:layout_marginTop="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:visibility="visible"
+            android:id="@+id/srl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+
+                android:listSelector="@android:color/transparent"
+                android:scrollbars="none"
+                android:divider="#00000000"
+                android:dividerHeight="0dip"
+                android:id="@+id/lv_live"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:visibility="visible">
+
+            </ListView>
+
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+
+        <include layout="@layout/web"/>
+    </FrameLayout>
+
+    <com.anywave.qpop.view.dragbutton.SuspendButtonLayout
+        android:visibility="visible"
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        suspend:distance="80dp"
+        suspend:image1="@mipmap/ic_launcher"
+        suspend:image2="@mipmap/ic_launcher"
+        suspend:image3="@mipmap/ic_launcher"
+        suspend:image4="@mipmap/ic_launcher"
+        suspend:image5="@mipmap/ic_launcher"
+        suspend:image6="@mipmap/ic_launcher"
+        suspend:imageMainClose="@drawable/bus_icon"
+        suspend:imageMainOpen="@drawable/bus_icon"
+        suspend:imageSize="75dp"
+        suspend:marginY="8dp"
+        suspend:number="0" />
+    <com.anywave.qpop.LoadingView
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:clickable="false"
+        />
+</RelativeLayout>

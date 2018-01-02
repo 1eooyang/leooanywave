@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:layout_margin="8dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:src="@drawable/live1"
+        android:layout_width="208dp"
+        android:layout_height="117dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:text="11:30-12:30"
+        android:textColor="#FF9B9B9B"
+        android:textSize="13sp"
+        />
+
+    <TextView
+        android:layout_width="68dp"
+        android:layout_height="22dp"
+        android:text="航拍中国"
+        android:textColor="#FF4A4A4A"
+        android:textSize="16sp"
+        />
+
+
+</LinearLayout>

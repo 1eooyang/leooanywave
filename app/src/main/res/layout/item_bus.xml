@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:gravity="center_vertical">
+
+
+        <ImageButton
+            android:id="@+id/ib_bus_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bus_icon_notselect"
+            android:visibility="gone" />
+
+        <CheckBox
+            android:id="@+id/cb_bus_select"
+            style="@style/CustomCheckboxTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+        <!--android:layout_width="116dp"
+        android:maxLines="1"
+        -->
+        <TextView
+
+            android:id="@+id/tv_bus_zhan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:text="宜山路虹梅路站宜山宜山"
+            android:textColor="#FF000000"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/iv_bus_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:background="@drawable/bus_icon_gettingout"
+            android:visibility="invisible" />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.anywave.qpop">
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <!-- 获取网络状态改变的权限 -->
+    <application
+        android:name=".App"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".activity.MainActivity" />
+        <activity
+            android:name=".activity.BusActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.PersionActivity"
+            android:launchMode="singleTask" />
+        <!--
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+        -->
+        <activity
+            android:name=".activity.LiveDetailActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme.Full" />
+        <activity android:name=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.WifiActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.HomeActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".test.Test2Activity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme.Full" />
+
+
+
+        <activity
+            android:name=".activity.SaveActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".activity.AboutActivity" />
+        <activity android:name=".activity.AddPWActivity" />
+        <activity
+            android:name=".activity.DialogActivity"
+            android:theme="@style/mytheme" />
+        <activity android:name=".activity.ClickLoginActivity" />
+        <activity android:name=".activity.ConnectActivity" />
+        <activity android:name=".activity.ChangePWActivity" />
+
+        <activity android:name=".activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.DialogPWActivity"
+            android:theme="@style/mytheme" />
+        <activity android:name=".activity.ChangeNextPWActivity" />
+        <activity android:name=".activity.ConnectedActivity" />
+        <activity android:name=".test.TestActivity" />
+        <activity android:name=".activity.NewsDetailActivity" />
+        <activity
+            android:name=".activity.DialogLoginActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/mytheme" />
+        <activity android:name=".activity.FuWuTiaoKuanActivity" />
+
+
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="59f0092da40fa345ed000027" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Qpop" />
+
+        <activity
+            android:name=".activity.DialogDeleteActivity"
+            android:theme="@style/mytheme" />
+        <activity
+            android:name=".activity.DialogBusActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/mytheme_bus" />
+        <activity
+            android:name=".activity.DialogBusconfirmActivity"
+            android:launchMode="singleTask"
+            android:theme="@style/mytheme" />
+        <activity
+            android:name=".activity.DialogBusRemindActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".test.Test5Activity" />
+        <activity android:name=".test.Test6Activity" />
+
+
+        <receiver android:name=".MyReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+            </intent-filter>
+        </receiver>
+
+
+        <service
+            android:name=".WifiConnectionService"
+            android:enabled="true"
+            android:exported="true"/>
+        <service
+            android:name=".WifiConnectionService2"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <service android:name="com.android.tedcoder.wkvideoplayer.dlna.service.DLNAService" />
+    </application>
+
+</manifest>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_margin="18dp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:text="提示"
+                android:textColor="#FF030303"
+                android:textSize="17sp"
+                />
+
+        </FrameLayout>
+
+        <TextView
+            android:lineSpacingExtra="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="退出账号将收不到到站提醒和精彩节目预告。确定要退出Qpop吗？"
+            android:textColor="#FF030303"
+            android:textSize="13sp"
+            />
+        <View
+            android:layout_marginTop="26dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#FFF5F5F5"
+            />
+        <LinearLayout
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="44dp">
+
+            <TextView
+                android:id="@+id/back"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:text="取消"
+                android:textColor="#FF9B9B9B"
+                android:textSize="17sp"
+                />
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="#FFF5F5F5"
+                />
+
+            <TextView
+                android:id="@+id/tv_confirm"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="24dp"
+                android:text="确定"
+                android:textColor="#FF52CC9A"
+                android:textSize="17sp"
+                />
+        </LinearLayout>
+
+
+
+</LinearLayout>
+
+

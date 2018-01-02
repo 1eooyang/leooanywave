@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/live1"
+                android:minHeight="200dp">
+
+                <ImageView
+                    android:padding="20dp"
+                    android:id="@+id/play_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/live_icon_detail_play" />
+
+                <com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer
+                    android:id="@+id/video_player_item_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="211dp"
+                    android:visibility="gone"></com.android.tedcoder.wkvideoplayer.view.SuperVideoPlayer>
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/live_back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/live_back" />
+
+
+        </RelativeLayout>
+
+
+    <TextView
+        android:gravity="center_vertical"
+        android:text="  节目单"
+        android:textColor="#FF000000"
+        android:textSize= "15sp"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="44dp" />
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/day_recyclerview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            </android.support.v7.widget.RecyclerView>
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="match_parent"
+                android:background="@color/line_color"
+                android:visibility="gone">
+
+            </View>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/content_recyclerview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_below="@+id/rl"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="@drawable/nav_top_img_bg" />
+
+
+    </FrameLayout>
+
+
+
+</LinearLayout>

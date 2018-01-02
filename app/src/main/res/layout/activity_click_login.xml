@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <FrameLayout
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:clickable="false"
+                android:layout_margin="16dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/icon_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_click_login"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_width="181dp"
+        android:layout_height="40dp"
+        android:text="点击登录"
+        android:textColor="#FF000000"
+        android:textSize="28sp"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/ll_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="27dp"
+            android:text="关于Qpop"
+            android:textColor="#FF000000"
+            android:textSize="15sp" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="17dp"
+            android:background="#FFF5F5F5" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <ImageButton
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="16dp"
+            android:id="@+id/back"
+            android:layout_centerVertical="true"
+            android:background="@drawable/icon_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="24dp"
+            android:text="修改密码"
+            android:textColor="#FF000000"
+            android:textSize="17sp"
+            />
+
+    </FrameLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="61dp">
+
+
+        <TextView
+            android:gravity="center_vertical"
+            android:layout_marginLeft="27dp"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="密码"
+            android:textColor="#FF000000"
+            android:textSize="15sp"
+            />
+        <EditText
+            android:textColorHint="#44000000"
+            android:id="@+id/et_pw"
+            android:background="@null"
+            style="?android:attr/textViewStyle"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="21dp"
+            android:inputType="textPassword"
+            android:hint="请输入密码"
+            android:layout_marginLeft="0dp"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFF5F5F5"
+        />
+
+
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="61dp">
+
+        <TextView
+            android:id="@+id/tv_code"
+            android:layout_marginLeft="27dp"
+            android:gravity="center_vertical"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:text="确认密码"
+            android:textColor="#FF000000"
+            android:textSize="15sp"
+            />
+
+        <FrameLayout
+            android:layout_weight="1"
+            android:layout_marginLeft="0dp"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="21dp">
+
+            <EditText
+                android:textColorHint="#44000000"
+                android:inputType="textPassword"
+                android:id="@+id/et_code"
+                android:background="@null"
+                style="?android:attr/textViewStyle"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:hint="请再次输入密码"
+                />
+
+        </FrameLayout>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FFF5F5F5"
+        />
+    <FrameLayout
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="31dp"
+        android:background="#FF52CC9A"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="确定"
+            android:textColor="#FFFFFFFF"
+            android:textSize="15sp"
+            />
+
+    </FrameLayout>
+</LinearLayout>
+

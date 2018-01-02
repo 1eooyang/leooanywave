@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">WifiConnHelperLib</string>
+
+    <string name="wifi7">Qpop_1</string>
+    <string name="wifi8">Qpop_2</string>
+
+</resources>

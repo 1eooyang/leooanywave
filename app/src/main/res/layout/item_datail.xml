@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="25dp"
+    android:text="12:20  共同关注共注共同注关注共同注关注共同注关注共同关注共同关注共同关注"
+    android:textColor="#88000000"
+    android:paddingBottom="4dp"
+    android:paddingTop="4dp"
+    android:layout_marginRight="0dp"
+    android:textSize="11sp" />

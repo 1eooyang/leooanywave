@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Qpop</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--<string name="wifi"></string>-->
+    <!--<string name="wifi">Xiao</string>-->
+
+    <string name="wifi2">Qpop_1</string>
+    <string name="wifi1">Qpop_2</string>
+    <string name="wifi3">WWKJ-WIFI</string>
+    <string name="wifi4">WWKJ-5G</string>
+    <string name="click_to_refresh"><Data><![CDATA[网络连接失败，点击<font color="#2AC2EF">重试</font>]]></Data></string>
+    <string name="catg_refreshing">正在进入Qpop智能系统&#8230;</string>
+
+
+    <string name="permission_get_accounts_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_GET_ACCOUNTS</string>
+    <string name="permission_read_phone_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_READ_PHONE_STATE</string>
+    <string name="permission_call_phone_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_CALL_PHONE</string>
+    <string name="permission_camera_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_CAMERA</string>
+    <string name="permission_access_fine_location_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_ACCESS_FINE_LOCATION</string>
+    <string name="permission_access_coarse_location_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_ACCESS_COARSE_LOCATION</string>
+    <string name="permission_read_external_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_READ_EXTERNAL_STORAGE</string>
+    <string name="permission_white_external_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_WRITE_EXTERNAL_STORAGE</string>
+    <string name="permission_recode_audio_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_RECORD_AUDIO</string>
+
+</resources>
