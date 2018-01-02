@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gsyVideoPlayer/gsyVideoPlayer.iml" filepath="$PROJECT_DIR$/gsyVideoPlayer/gsyVideoPlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/leooanywave.iml" filepath="$PROJECT_DIR$/leooanywave.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nicevideoplayer/nicevideoplayer.iml" filepath="$PROJECT_DIR$/nicevideoplayer/nicevideoplayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/suspendbuttonlayout/suspendbuttonlayout.iml" filepath="$PROJECT_DIR$/suspendbuttonlayout/suspendbuttonlayout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wificonnhelperlib/wificonnhelperlib.iml" filepath="$PROJECT_DIR$/wificonnhelperlib/wificonnhelperlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/wkvideoplayer/wkvideoplayer.iml" filepath="$PROJECT_DIR$/wkvideoplayer/wkvideoplayer.iml" />
+    </modules>
+  </component>
+</project>
