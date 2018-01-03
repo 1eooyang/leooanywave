@@ -11,7 +11,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
@@ -38,6 +37,7 @@ import com.anywave.qpop.LoadingView;
 import com.anywave.qpop.R;
 import com.anywave.qpop.adapter.LiveAdapter;
 import com.anywave.qpop.bean.PlayList;
+import com.anywave.qpop.event.ExitAppEvent;
 import com.anywave.qpop.event.WifiStateEvent;
 import com.anywave.qpop.http.Constants;
 import com.anywave.qpop.http.MyHttp;
@@ -133,7 +133,24 @@ public class HomeActivity extends Activity {
         App.homeActivity = null;
 
     }
+    private long preClickTime;
 
+    @Override
+    public void onBackPressed() {
+
+
+     long ClickTime =  System.currentTimeMillis();
+        if (ClickTime - preClickTime < 2000) {
+            EventBus.getDefault().post(new ExitAppEvent());
+            super.onBackPressed();
+        } else {
+            preClickTime = ClickTime;
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(MyEvent event) {
@@ -279,12 +296,12 @@ public class HomeActivity extends Activity {
         lvLive.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                if (!App.isLogin) {
+               /* if (!App.isLogin) {
                     App.startActivity(HomeActivity.this, DialogLoginActivity.class);
-                } else {
+                } else {*/
                     position = i;
                     startToLiveDetail(position);
-                }
+              //  }
             }
         });
 
@@ -337,7 +354,7 @@ public class HomeActivity extends Activity {
                 currentweek = week - 2;
                 break;
         }
-        App.startActivityParams(LiveDetailActivity2.class, listBeen.get(i).getId(), listBeen.get(i).getPlayUrl());
+        App.startActivityParams(LiveDetailActivity.class, listBeen.get(i).getId(), listBeen.get(i).getPlayUrl());
     }
 
     @Override
@@ -492,13 +509,16 @@ private boolean isShowed;
     };
 
 
-    @Override
+   /* @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
+
+
+
             return true;
         }
         return super.onKeyDown(keyCode, event);
-    }
+    }*/
 
 
     @Override

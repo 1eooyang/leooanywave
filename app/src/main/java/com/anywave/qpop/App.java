@@ -46,7 +46,7 @@ public class App extends Application {
     private static Timer mytimer;
 
     public static volatile boolean isWifi;//not
-    public static boolean IsWifiModel = false;//not
+    public static boolean IsWifiModel = true;//not
 
     public static boolean isCurrentApp;
 

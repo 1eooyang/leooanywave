@@ -141,7 +141,7 @@
             android:layout_marginLeft="16dp"
             android:layout_width="match_parent"
             android:layout_height="21dp"
-            android:text="关于Qpop"
+            android:text="关于全播"
             android:textColor="#FF000000"
             android:textSize="15sp"
             />

@@ -16,12 +16,11 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 
+import com.anywave.qpop.event.ExitAppEvent;
 import com.anywave.qpop.event.OnOff;
-import com.anywave.qpop.event.OnWifiCloseEvent;
 import com.anywave.qpop.event.PermissionEvent;
 import com.anywave.qpop.event.WifiStateEvent;
 import com.anywave.qpop.utils.Util;
@@ -104,6 +103,7 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
         }
     };
     private wifiOnOffRecever mWifiOnOffRecever;
+    private volatile boolean isInBackGround;
 
 
     @Nullable
@@ -129,24 +129,41 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
             App.startActivity(HomeActivity.class);
            // finish();
         }*/
-        if (!App.IsWifiModel) {
-            if (event.isDisConnecetWifi()) {
-                System.out.println("leo 退出后台");
 
-                String connectWifiSSID = mWifiAdmin.getConnectWifiSSID(this);
-                if (Util.isWifi(connectWifiSSID)) {
-                    mHandler.removeCallbacksAndMessages(null);
-                    mWifiAdmin.forget();
-                }
+        if (event.isDisConnecetWifi()) {
+            System.out.println("leo 退出后台");
+            isInBackGround = true;
 
 
-            } else {
-                System.out.println("leo 恢复前台 ");
-                if (mHandler != null)
-                    mHandler.sendEmptyMessage(CHECK_WIFI);
+            /*String connectWifiSSID = mWifiAdmin.getConnectWifiSSID(this);
+            if (Util.isWifi(connectWifiSSID)) {*/
+            mHandler.removeCallbacksAndMessages(null);
+            if (!App.IsWifiModel) {
+                mWifiAdmin.forget();
             }
+            //  }
+
+
+        } else {
+            isInBackGround = false;
+            System.out.println("leo 恢复前台 ");
+            if (mHandler != null)
+                mHandler.sendEmptyMessage(CHECK_WIFI);
         }
+
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void AppExited(ExitAppEvent event) {//如果是wifi模式下  用户手动退出APP  那么需要忘记我们的WIFI密码
+        System.out.println("leo Event 退出APP");
+        mHandler.removeCallbacksAndMessages(null);
+        if (App.IsWifiModel) {
+            mWifiAdmin.forget();
+        }
+
+    }
+
 
 
     @Override
@@ -221,11 +238,31 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        ScanWifi();
+
 
 
         mWifiOnOffRecever = new wifiOnOffRecever();
         registerReceiver(mWifiOnOffRecever, new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION));
+
+
+
+        String connectWifiSSID = mWifiAdmin.getConnectWifiSSID(this);//当前连接的wifi ssid
+
+        System.out.println("leo ScanWifi : " + connectWifiSSID);
+
+        if (Util.isWifi(connectWifiSSID)) {//如果当前
+
+            System.out.println("leo 已经连接了 : " + connectWifiSSID);
+            mHandler.removeMessages(CHECK_WIFI);
+            mHandler.sendEmptyMessageDelayed(CHECK_WIFI, 2000);
+            EventBus.getDefault().post(WifiStateEvent.getInstance(true));
+
+        } else {
+
+            ScanWifi();
+
+        }
+
 
         return START_STICKY;
     }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.anywave.qpop.App;
 import com.anywave.qpop.R;
+import com.anywave.qpop.event.ExitAppEvent;
 import com.anywave.qpop.event.PermissionEvent;
 import com.anywave.qpop.event.WifiStateEvent;
 import com.anywave.qpop.http.MyHttp;
@@ -141,9 +142,21 @@ public class WifiActivity extends Activity {
             PermissionUtils.requestPermissionsResult(this,requestCode,permissions,grantResults,cccc);
     }
 
+    private long preClickTime;
+
     @Override
     public void onBackPressed() {
-        //        super.onBackPressed();
+
+        long ClickTime =  System.currentTimeMillis();
+        if (ClickTime - preClickTime < 2000) {
+
+            EventBus.getDefault().post(new ExitAppEvent());
+
+            super.onBackPressed();
+        } else {
+            preClickTime = ClickTime;
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @OnClick(R.id.tv_connect)

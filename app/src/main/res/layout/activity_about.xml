@@ -33,7 +33,7 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="关于Qpop"
+                android:text="关于全播"
                 android:textColor="#FF000000"
                 android:textSize="17sp" />
 
