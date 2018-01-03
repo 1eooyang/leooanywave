@@ -99,6 +99,8 @@ public class LiveDetailActivity extends AppCompatActivity {
     //private HomeKeyWatcher mHomeKeyWatcher;
     private boolean pressedHome;
     private int num;
+    private static long mCurrentPosition;
+    private int preClickPosition;
 
     private void MoveToPosition(LinearLayoutManager manager, int n) {
         manager.scrollToPositionWithOffset(n, 0);
@@ -132,8 +134,7 @@ public class LiveDetailActivity extends AppCompatActivity {
         if (position > 0) {
             mNiceVideoPlayer.start(position);
         } else {
-            //if()
-            //  mNiceVideoPlayer.
+
             mNiceVideoPlayer.start(0);
         }
         App.isClicked = false;
@@ -143,7 +144,7 @@ public class LiveDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        App.isLiveBackFromHome = true;
+        //App.isLiveBackFromHome = true;
         //   mHomeKeyWatcher = new HomeKeyWatcher(this);
         //   mHomeKeyWatcher.setOnHomePressedListener(new HomeKeyWatcher.OnHomePressedListener() {
         //  @Override
@@ -159,6 +160,14 @@ public class LiveDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_live_detail);
         mNiceVideoPlayer = (NiceVideoPlayer) findViewById(R.id.nice_video_player);
         ivNull = (ImageView) findViewById(R.id.iv_null);
+        ivNull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivNull.setVisibility(View.GONE);
+                long time = System.currentTimeMillis() + (preClickPosition - currentweek) * 24 * 60 * 60 * 1000;
+                getHk(currentid, new SimpleDateFormat("yyyy-MM-dd").format(new Date(time)), preClickPosition);
+            }
+        });
         contentRecyclerview = (RecyclerView) findViewById(R.id.content_recyclerview);
         ButterKnife.bind(this);
         EventBus.getDefault().register(this);
@@ -192,8 +201,8 @@ public class LiveDetailActivity extends AppCompatActivity {
         dayAdapter.setOnItemClickListener(new TvDetialDayAdapter.OnItemClickListener() {
             @Override
             public void onClick(int position) {
+                preClickPosition = position;
                 long time = System.currentTimeMillis() + (position - currentweek) * 24 * 60 * 60 * 1000;
-
                 getHk(currentid, new SimpleDateFormat("yyyy-MM-dd").format(new Date(time)), position);
             }
         });
@@ -212,7 +221,9 @@ public class LiveDetailActivity extends AppCompatActivity {
 
         getDay(currentweek);
 
+
         getHk(currentid, Util.getDate(), currentweek);
+        preClickPosition = currentweek;
 
     }
 
@@ -453,12 +464,16 @@ public class LiveDetailActivity extends AppCompatActivity {
 
                 @Override
                 public void onError(Throwable ex, boolean isOnCallback) {
-
+                    mapivNull.put(day, false);
+                    //                    if (day == currentweek)
+                    ivNull.setVisibility(View.VISIBLE);
                 }
 
                 @Override
                 public void onCancelled(CancelledException cex) {
-
+                    mapivNull.put(day, false);
+                    //                    if (day == currentweek)
+                    ivNull.setVisibility(View.VISIBLE);
                 }
 
                 @Override
@@ -476,15 +491,47 @@ public class LiveDetailActivity extends AppCompatActivity {
         super.onStart();
         if (contentAdapter != null)
             contentAdapter.notifyDataSetChanged();
+//        EventBus.getDefault().postSticky(1);
+//        play(url);
+
+        System.out.println("leo onStart");
+        //hxp 11.6
+        if (mNiceVideoPlayer != null) {
+
+            mNiceVideoPlayer.start();
+
+
+        }
+      /*  if (handler != null) {
+            handler.sendEmptyMessageDelayed(99, 1000);
+        }*/
+
+//        if (!getConnectWifiSsid().contains("Qpop")){
+//            App.startActivity(WifiActivity.class);
+//        }
     }
 
+
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+    }
 
     @Override
     protected void onStop() {
         // 在OnStop中是release还是suspend播放器，需要看是不是因为按了Home键
         super.onStop();
+        if (NiceVideoPlayerManager.instance().getCurrentNiceVideoPlayer() != null) {
+            mCurrentPosition = NiceVideoPlayerManager.instance().getCurrentNiceVideoPlayer().getCurrentPosition();
+        }
 
-        // if (pressedHome) {
+        System.out.println("leo onstop currentPosition = " + mCurrentPosition);
+
+        NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
+      /*  // if (pressedHome) {
         if (App.IsWifiModel) {
             NiceVideoPlayerManager.instance().suspendNiceVideoPlayer();
 
@@ -495,12 +542,12 @@ public class LiveDetailActivity extends AppCompatActivity {
             finish();
         }
 
-      /*  } else {
+      *//*  } else {
             NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
-        }*/
+        }*//*
         if (mNiceVideoPlayer != null) {
             mNiceVideoPlayer.setVolume(0);
-        }
+        }*/
 
         //  mHomeKeyWatcher.stopWatch();
 
@@ -513,13 +560,11 @@ public class LiveDetailActivity extends AppCompatActivity {
       //  mHomeKeyWatcher.startWatch();
 
         super.onRestart();
-        NiceVideoPlayerManager.instance().resumeNiceVideoPlayer();
+       // NiceVideoPlayerManager.instance().resumeNiceVideoPlayer();
        /* if (mNiceVideoPlayer != null && mNiceVideoPlayer.isIdle()) {
             mNiceVideoPlayer.start();
         }*/
-        if (mNiceVideoPlayer != null) {
-            mNiceVideoPlayer.setVolume(10);
-        }
+
     }
 
     @Override
@@ -545,15 +590,15 @@ public class LiveDetailActivity extends AppCompatActivity {
         if (NiceVideoPlayerManager.instance().onBackPressd()) return;
         finish();
         // 在onStop时释放掉播放器
-        //  NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
-        App.isLiveBackFromHome = false;
+          NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
+       // App.isLiveBackFromHome = false;
         super.onBackPressed();
     }
 
 
     @OnClick(R.id.live_back)
     public void onViewClicked() {
-        App.isLiveBackFromHome = false;
+       // App.isLiveBackFromHome = false;
         // 在全屏或者小窗口时按返回键要先退出全屏或小窗口，
         // 所以在Activity中onBackPress要交给NiceVideoPlayer先处理。
         if (NiceVideoPlayerManager.instance().onBackPressd()) return;
@@ -634,6 +679,13 @@ public class LiveDetailActivity extends AppCompatActivity {
                     EventBus.getDefault().post(event);
                     break;
                 case 2:
+                    break;
+                case 99:
+
+                    if (mNiceVideoPlayer != null) {
+                        mNiceVideoPlayer.seekTo(mCurrentPosition);
+                    }
+
                     break;
                 default:
                     super.handleMessage(msg);

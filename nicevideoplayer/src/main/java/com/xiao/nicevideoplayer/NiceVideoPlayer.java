@@ -486,14 +486,14 @@ public class NiceVideoPlayer extends FrameLayout
         public void onPrepared(IMediaPlayer mp) {
             mCurrentState = STATE_PREPARED;
             mController.onPlayStateChanged(mCurrentState);
-            LogUtil.d("onPrepared ——> STATE_PREPARED");
+            LogUtil.d("leo onPrepared ——> STATE_PREPARED");
             mp.start();
             // 从上次的保存位置播放
             if (continueFromLastPosition) {
                 long savedPlayPosition = NiceUtil.getSavedPlayPosition(mContext, mUrl);
-//                mp.seekTo(savedPlayPosition);
+                mp.seekTo(savedPlayPosition);
                 //hxp
-                mp.seekTo(0);
+               // mp.seekTo(0);
             }
             // 跳到指定位置播放
             if (skipToPosition != 0) {

@@ -35,7 +35,7 @@ public class App extends Application {
     public static Boolean isLogin;
     public static String token="";
 
-    public static boolean isLiveBackFromHome;
+    //public static boolean isLiveBackFromHome;
 //    public static Map<Integer,Boolean> currentDetailMap;
     public static Map<Integer,Boolean>[] currentDetailMapArray;
     public static String currentPersion;

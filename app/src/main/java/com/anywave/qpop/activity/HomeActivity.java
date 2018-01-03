@@ -159,7 +159,11 @@ public class HomeActivity extends Activity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void WifiConnected(WifiStateEvent event) {
+        if (!isShowed) {
+            return;
+        }
         if (event.isStartConnectWifi()) {
+
             Toast.makeText(App.context, "开始连接Wifi", Toast.LENGTH_LONG).show();
         } else {
            /* if (App.isLiveBackFromHome) {
@@ -170,26 +174,26 @@ public class HomeActivity extends Activity {
 
             App.isWifi = event.isWifiConnect();
             if (!App.isWifi) {
-                if (isShowed) {
+                //if (isShowed) {
                     App.startActivity(this, WifiActivity.class);
                     finish();
-                }
+                //}
             } else {
 
                 MyHttp.getWifiModel();
 
 
-                if (!App.IsWifiModel) {
+               /* if (!App.IsWifiModel) {
                     if (App.isLiveBackFromHome) {
                         App.isLiveBackFromHome = false;
                         //long l = System.currentTimeMillis() - currentTimeMillis;
-                  /*      if (l > 1100) {
+                  *//*      if (l > 1100) {
                             mHandler.sendEmptyMessage(1);
-                        } else {*/
+                        } else {*//*
                             mHandler.sendEmptyMessageDelayed(1, 1100);
                        // }
                     }
-                }
+                }*/
 
 
                 getPlayList();
@@ -296,12 +300,12 @@ public class HomeActivity extends Activity {
         lvLive.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-               /* if (!App.isLogin) {
+                if (!App.isLogin) {
                     App.startActivity(HomeActivity.this, DialogLoginActivity.class);
-                } else {*/
+                } else {
                     position = i;
                     startToLiveDetail(position);
-              //  }
+               }
             }
         });
 
@@ -503,7 +507,7 @@ private boolean isShowed;
 
             startToLiveDetail(position);
             System.out.println("leo startToLiveDetail");
-            App.isLiveBackFromHome = false;
+          //  App.isLiveBackFromHome = false;
             //finish();
         }
     };
@@ -556,10 +560,12 @@ private boolean isShowed;
                 break;
             case R.id.ll_wifi:
 
-                if (App.isWifi) {
+               // if (App.isWifi) {
                     Toast.makeText(this, "已连接公交WiFi", Toast.LENGTH_SHORT).show();
-                } else
+                /*} else{
                     startActivity(new Intent(HomeActivity.this, ConnectActivity.class));
+                }*/
+
                 break;
             case R.id.ll_live:
 

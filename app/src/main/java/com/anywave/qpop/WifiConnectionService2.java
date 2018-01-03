@@ -198,10 +198,11 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
         System.out.println("leo1 连接成功 : " + ssid);
         if (Util.isWifi(ssid)) {
             EventBus.getDefault().post(WifiStateEvent.getInstance(true));
+            App.isWifi = true;
         }
-        //  mHandler.removeCallbacksAndMessages(null);
+          mHandler.removeCallbacksAndMessages(null);
         //  mHandler.removeMessages(NOTIFY_CONDITION);
-        mHandler.removeMessages(CHECK_WIFI);
+       // mHandler.removeMessages(CHECK_WIFI);
         mHandler.sendEmptyMessageDelayed(CHECK_WIFI, 2000);//轮询检测wifi是否正常连接
     }
 
@@ -218,7 +219,7 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
             return;
         }*/
 
-
+        App.isWifi = false;
         System.out.println("leo1 连接失败 : " + ssid + " reason : " + reason);
         if (reason == 1) {
             if (Util.isWifi(ssid)) {
@@ -325,7 +326,14 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
 
         } else {
 
-            ScanWifi();
+
+            if (TextUtils.isEmpty(connectWifiSSID)) {
+                mHandler.removeMessages(CHECK_WIFI);
+                mHandler.sendEmptyMessageDelayed(CHECK_WIFI, 1000);
+            } else {
+
+                ScanWifi();
+            }
 
         }
 

@@ -168,6 +168,7 @@ public class LoginActivity extends Activity {
 
                     @Override
                     public void onError(Throwable ex, boolean isOnCallback) {
+                        System.out.println("leo 验证码onError : "+ ex.getMessage());
                     }
 
                     @Override
