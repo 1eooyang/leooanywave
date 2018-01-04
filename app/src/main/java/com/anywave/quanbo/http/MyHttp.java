@@ -366,8 +366,20 @@ public class MyHttp {
             return;
         }
         System.out.println("leo getWifiModel");
-
         haveRequested = true;
+
+ /*       WifiBodelBean wifiBodelBean1 = new Gson().fromJson("{\"code\":\"200\",\"echo\":\"echo9\",\"gw_mac\":\"94:40:a2:1a:07:bc\",\"umac\":\"60:6d:c7:1c:96:85\",\"uip\":\"192.168.0.35\",\"mode\":\"0\"}", WifiBodelBean.class);
+     //   System.out.println("leo wifi模式Bean " + wifiBodelBean);
+        if (wifiBodelBean1.getCode().equals("200")) {
+            if (wifiBodelBean1.getEcho().contains(String.valueOf(9))) {
+
+                App.IsWifiModel = wifiBodelBean1.getMode().equals("1");
+                System.out.println("leo wifi模式 : " +  App.IsWifiModel);
+                //System.out.println("leo isWifiModel = "+ App.IsWifiModel);
+            }
+        }
+*/
+
         final int i = new Random().nextInt(100000);
         RequestParams params = new RequestParams(Constants.wifimodel);
         params.setAsJsonContent(true);
@@ -383,23 +395,25 @@ public class MyHttp {
             @Override
             public void onSuccess(String wifiBodelBean) {
                 if (!TextUtils.isEmpty(wifiBodelBean)) {
-
-                    WifiBodelBean wifiBodelBean1 = new Gson().fromJson(wifiBodelBean, WifiBodelBean.class);
-                    System.out.println("leo wifi模式Bean " + wifiBodelBean);
-                if (wifiBodelBean1.getCode().equals("200")) {
-                    if (wifiBodelBean1.getEcho().contains(String.valueOf(i))) {
-
-                        App.IsWifiModel = wifiBodelBean1.getMode().equals("1");
-                        System.out.println("leo wifi模式 : " +  App.IsWifiModel);
-                        //System.out.println("leo isWifiModel = "+ App.IsWifiModel);
+                    try {
+                        WifiBodelBean wifiBodelBean1 = new Gson().fromJson(wifiBodelBean, WifiBodelBean.class);
+                        System.out.println("leo wifi模式Bean " + wifiBodelBean);
+                        if (wifiBodelBean1.getCode().equals("200")) {
+                            if (wifiBodelBean1.getEcho().contains(String.valueOf(i))) {
+                                App.IsWifiModel = wifiBodelBean1.getMode().equals("1");
+                                // System.out.println("leo wifi模式 : " +  App.IsWifiModel);
+                                //System.out.println("leo isWifiModel = "+ App.IsWifiModel);
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                }
                 }
             }
 
             @Override
             public void onError(Throwable throwable, boolean b) {
-                System.out.println("leo wifi模式 onError: " +  throwable.getMessage());
+                System.out.println("leo wifi模式 onError: " + throwable.getMessage());
             }
 
             @Override
@@ -410,7 +424,6 @@ public class MyHttp {
             @Override
             public void onFinished() {
                 System.out.println("leo wifi模式 onFinished: ");
-
 
 
             }

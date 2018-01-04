@@ -526,6 +526,12 @@ public class LiveDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
+        }
+
         super.onDestroy();
 
     }
@@ -534,6 +540,11 @@ public class LiveDetailActivity extends AppCompatActivity {
     protected void onStop() {
         // 在OnStop中是release还是suspend播放器，需要看是不是因为按了Home键
         super.onStop();
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            //handler = null;
+        }
+
         if (NiceVideoPlayerManager.instance().getCurrentNiceVideoPlayer() != null) {
             mCurrentPosition = NiceVideoPlayerManager.instance().getCurrentNiceVideoPlayer().getCurrentPosition();
         }
@@ -648,6 +659,10 @@ public class LiveDetailActivity extends AppCompatActivity {
                     App.startActivity(this, WifiActivity.class);
                     finish();
                 }
+            } else {
+                if (contentAdapter != null && !App.not_native) {
+                    handler.sendEmptyMessageDelayed(99, 1000);
+                }
             }
         }
 
@@ -662,7 +677,7 @@ public class LiveDetailActivity extends AppCompatActivity {
     /**
      *
      */
-    private static class MyHandler extends Handler {
+    private  class MyHandler extends Handler {
         //对Activity的弱引用
         private final WeakReference<LiveDetailActivity> mActivity;
 
@@ -692,9 +707,7 @@ public class LiveDetailActivity extends AppCompatActivity {
                     break;
                 case 99:
 
-                    if (mNiceVideoPlayer != null) {
-                        mNiceVideoPlayer.seekTo(mCurrentPosition);
-                    }
+                    contentAdapter.reFlashZhiBo();
 
                     break;
                 default:

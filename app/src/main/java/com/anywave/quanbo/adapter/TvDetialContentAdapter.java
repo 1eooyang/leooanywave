@@ -47,6 +47,7 @@ public class TvDetialContentAdapter extends RecyclerView.Adapter<TvDetialContent
 
     //    Map<Integer,DetialContentViewHolder> mapHolder;
     private static final String TAG = "TvDetialContentAdapter";
+    private DetialContentViewHolder mDetialContentViewHolder;
 
     public void setDate(Context context, final List<HK2List.DataBeanX.DataBean> dataBeen, final int currentDay) {
         this.context = context;
@@ -125,7 +126,8 @@ public class TvDetialContentAdapter extends RecyclerView.Adapter<TvDetialContent
 
     @Override
     public DetialContentViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new DetialContentViewHolder(LayoutInflater.from(context).inflate(R.layout.item_tvcontent, parent, false));
+        mDetialContentViewHolder = new DetialContentViewHolder(LayoutInflater.from(context).inflate(R.layout.item_tvcontent, parent, false));
+        return mDetialContentViewHolder;
     }
 
     @Override
@@ -141,6 +143,20 @@ public class TvDetialContentAdapter extends RecyclerView.Adapter<TvDetialContent
         return dataBeen.size();
 //        return 100;
     }
+
+    public void reFlashZhiBo(){
+        if (currentZhiBoBean == null) {
+            return;
+        }
+
+
+        mDetialContentViewHolder.ClickZhiBo(currentZhiBoBean, currentZhiBoPosition);
+
+    }
+
+
+    private HK2List.DataBeanX.DataBean currentZhiBoBean;
+    private int currentZhiBoPosition;
 
     class DetialContentViewHolder extends RecyclerView.ViewHolder {
         TextView tv;
@@ -165,7 +181,8 @@ public class TvDetialContentAdapter extends RecyclerView.Adapter<TvDetialContent
                 case 0:
                     //表示正在播出的节目
                     getLiveStates(1, dataBean.getVideoValid());
-
+                    currentZhiBoBean = dataBean;
+                    currentZhiBoPosition = position;
                     if (!clickBack && App.currentDetailMapArray[currentDay] == null) {
                         map.put(position, true);
                     }
@@ -260,25 +277,7 @@ public class TvDetialContentAdapter extends RecyclerView.Adapter<TvDetialContent
                 public void onClick(View view) {
                     if (App.isClicked) {
                     } else {
-                        if (LiveDetailActivity.mNiceVideoPlayer != null && LiveDetailActivity.mNiceVideoPlayer.mController != null) {
-                            ((TxVideoPlayerController) LiveDetailActivity.mNiceVideoPlayer.mController).loading();
-                            NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
-                        }
-                        App.isClicked = true;
-                        App.not_native = false;
-
-                        EventBus.getDefault().post(new TvDetialAdapterBean(viewHolder.cb, dataBean.getCheckUrl()));
-
-
-                        for (int i = 0; i < dataBeen.size(); i++) {
-                            map.put(i, false);
-                            if (i == position) {
-                                map.put(position, true);
-                                Log.e(TAG, "onClick:map:" + position + " v " + map.get(position));
-                            }
-                        }
-                        clickSelect();
-                        notifyDataSetChanged();
+                        ClickZhiBo(dataBean, position);
                     }
                 }
             });
@@ -292,6 +291,28 @@ public class TvDetialContentAdapter extends RecyclerView.Adapter<TvDetialContent
 
                 Log.e(TAG, map.get(position) + "bindData: ==================== " + position);
             }
+        }
+
+        private void ClickZhiBo(HK2List.DataBeanX.DataBean dataBean, int position) {
+            if (LiveDetailActivity.mNiceVideoPlayer != null && LiveDetailActivity.mNiceVideoPlayer.mController != null) {
+                ((TxVideoPlayerController) LiveDetailActivity.mNiceVideoPlayer.mController).loading();
+                NiceVideoPlayerManager.instance().releaseNiceVideoPlayer();
+            }
+            App.isClicked = true;
+            App.not_native = false;
+
+            EventBus.getDefault().post(new TvDetialAdapterBean(viewHolder.cb, dataBean.getCheckUrl()));
+
+
+            for (int i = 0; i < dataBeen.size(); i++) {
+                map.put(i, false);
+                if (i == position) {
+                    map.put(position, true);
+                    Log.e(TAG, "onClick:map:" + position + " v " + map.get(position));
+                }
+            }
+            clickSelect();
+            notifyDataSetChanged();
         }
 
         private void showSelect(boolean b, int p) {
