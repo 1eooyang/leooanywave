@@ -381,7 +381,7 @@ public class MyHttp {
             public void onSuccess(WifiBodelBean wifiBodelBean) {
 
                 if (wifiBodelBean.getCode().equals("200")) {
-                    if (wifiBodelBean.getEcho().replace("echo", "").equals(String.valueOf(i))) {
+                    if (wifiBodelBean.getEcho().contains(String.valueOf(i))) {
 
                         App.IsWifiModel = wifiBodelBean.getMode().equals("1");
                         Toast.makeText(App.context, "wifi模式 : " +  App.IsWifiModel, Toast.LENGTH_LONG).show();

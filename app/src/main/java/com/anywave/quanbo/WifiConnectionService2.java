@@ -399,16 +399,16 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
                             mWifiConnector.addWifiBeanConn(new WifiBeanConn("wwkj2017", scanResult)).connectWithSSID(this);
 
                         }
-                        break;
                     }
+                    break;
                 }
 
-                if (!hasResult) {
-                    System.out.println("leo 处理没有扫描到指定wifi");
-                    mHandler.removeMessages(SCAN_WIFI);
-                    mHandler.sendEmptyMessageDelayed(SCAN_WIFI, 2000);
-                    //  EventBus.getDefault().post(WifiStateEvent.getInstance(false));
-                }
+            }
+            if (!hasResult) {
+                System.out.println("leo 处理没有扫描到指定wifi");
+                mHandler.removeMessages(SCAN_WIFI);
+                mHandler.sendEmptyMessageDelayed(SCAN_WIFI, 2000);
+                //  EventBus.getDefault().post(WifiStateEvent.getInstance(false));
             }
         }
 
