@@ -2,8 +2,8 @@ package com.anywave.quanbo.http;
 
 import android.app.Activity;
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.anywave.quanbo.App;
 import com.anywave.quanbo.activity.HomeActivity;
@@ -365,45 +365,51 @@ public class MyHttp {
         if (haveRequested) {
             return;
         }
+        System.out.println("leo getWifiModel");
+
         haveRequested = true;
         final int i = new Random().nextInt(100000);
         RequestParams params = new RequestParams(Constants.wifimodel);
         params.setAsJsonContent(true);
         params.addBodyParameter("queryid", String.valueOf(i));
 
-        x.http().get(params, new Callback.CacheCallback<WifiBodelBean>() {
+        x.http().get(params, new Callback.CacheCallback<String>() {
             @Override
-            public boolean onCache(WifiBodelBean wifiBodelBean) {
+            public boolean onCache(String wifiBodelBean) {
+                System.out.println("leo wifi模式 onCache: ");
                 return false;
             }
 
             @Override
-            public void onSuccess(WifiBodelBean wifiBodelBean) {
+            public void onSuccess(String wifiBodelBean) {
+                if (!TextUtils.isEmpty(wifiBodelBean)) {
 
-                if (wifiBodelBean.getCode().equals("200")) {
-                    if (wifiBodelBean.getEcho().contains(String.valueOf(i))) {
+                    WifiBodelBean wifiBodelBean1 = new Gson().fromJson(wifiBodelBean, WifiBodelBean.class);
+                    System.out.println("leo wifi模式Bean " + wifiBodelBean);
+                if (wifiBodelBean1.getCode().equals("200")) {
+                    if (wifiBodelBean1.getEcho().contains(String.valueOf(i))) {
 
-                        App.IsWifiModel = wifiBodelBean.getMode().equals("1");
-                        Toast.makeText(App.context, "wifi模式 : " +  App.IsWifiModel, Toast.LENGTH_LONG).show();
+                        App.IsWifiModel = wifiBodelBean1.getMode().equals("1");
+                        System.out.println("leo wifi模式 : " +  App.IsWifiModel);
                         //System.out.println("leo isWifiModel = "+ App.IsWifiModel);
                     }
                 }
-
+                }
             }
 
             @Override
             public void onError(Throwable throwable, boolean b) {
-
+                System.out.println("leo wifi模式 onError: " +  throwable.getMessage());
             }
 
             @Override
             public void onCancelled(CancelledException e) {
-
+                System.out.println("leo wifi模式 onCancelled: ");
             }
 
             @Override
             public void onFinished() {
-
+                System.out.println("leo wifi模式 onFinished: ");
 
 
 

@@ -142,7 +142,8 @@ public class HomeActivity extends Activity {
      long ClickTime =  System.currentTimeMillis();
         if (ClickTime - preClickTime < 2000) {
             EventBus.getDefault().post(new ExitAppEvent());
-            super.onBackPressed();
+            System.exit(0);
+            //super.onBackPressed();
         } else {
             preClickTime = ClickTime;
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
@@ -300,12 +301,12 @@ public class HomeActivity extends Activity {
         lvLive.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-                if (!App.isLogin) {
+             /*   if (!App.isLogin) {
                     App.startActivity(HomeActivity.this, DialogLoginActivity.class);
-                } else {
+                } else {*/
                     position = i;
                     startToLiveDetail(position);
-               }
+               //}
             }
         });
 
