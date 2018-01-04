@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.anywave.qpop.activity.FuWuTiaoKuanActivity">
+    tools:context="com.anywave.quanbo.activity.FuWuTiaoKuanActivity">
    <FrameLayout
        android:layout_width="match_parent"
        android:layout_height="50dp">

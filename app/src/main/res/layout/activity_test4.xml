@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.anywave.qpop.test.Test4Activity">
+    tools:context="com.anywave.quanbo.test.Test4Activity">
 
     <com.xiao.nicevideoplayer.NiceVideoPlayer
         android:id="@+id/nice_video_player"

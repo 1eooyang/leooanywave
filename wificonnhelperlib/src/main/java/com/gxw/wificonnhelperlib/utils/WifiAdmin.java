@@ -78,6 +78,9 @@ public class WifiAdmin {
     public void forget() {
 
         //mWifiManager.
+        if (mWifiManager == null) {
+            return;
+        }
         List<WifiConfiguration> existingConfigs = mWifiManager.getConfiguredNetworks();
         if (existingConfigs == null) {
             return;

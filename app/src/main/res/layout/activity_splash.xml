@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.anywave.qpop.activity.SplashActivity">
+    tools:context="com.anywave.quanbo.activity.SplashActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/launch_logo" />
+        android:background="@drawable/login_logo" />
 
     <RelativeLayout
         android:layout_width="match_parent"

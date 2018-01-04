@@ -194,7 +194,7 @@
         <include layout="@layout/web"/>
     </FrameLayout>
 
-    <com.anywave.qpop.view.dragbutton.SuspendButtonLayout
+    <com.anywave.quanbo.view.dragbutton.SuspendButtonLayout
         android:visibility="visible"
         android:id="@+id/layout"
         android:layout_width="match_parent"
@@ -211,7 +211,7 @@
         suspend:imageSize="75dp"
         suspend:marginY="8dp"
         suspend:number="0" />
-    <com.anywave.qpop.LoadingView
+    <com.anywave.quanbo.LoadingView
         android:id="@+id/loading_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

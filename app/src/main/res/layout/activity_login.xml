@@ -21,7 +21,7 @@
 
         <ImageView
             android:layout_centerInParent="true"
-            android:background="@drawable/signup_icon_logo"
+            android:background="@drawable/login_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>
