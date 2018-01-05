@@ -393,18 +393,7 @@ public class MyHttp {
             }
 
             @Override
-<<<<<<< HEAD
-            public void onSuccess(WifiBodelBean wifiBodelBean) {
 
-                if (wifiBodelBean.getCode().equals("200")) {
-                    if (wifiBodelBean.getEcho().contains(String.valueOf(i))) {
-
-                        App.IsWifiModel = wifiBodelBean.getMode().equals("1");
-                        Toast.makeText(App.context, "wifi模式 : " + App.IsWifiModel, Toast.LENGTH_LONG).show();
-                        //System.out.println("leo isWifiModel = "+ App.IsWifiModel);
-                    } else {
-                        Toast.makeText(App.context, "wifi模式 : echo 不匹配" +  App.IsWifiModel, Toast.LENGTH_LONG).show();
-=======
             public void onSuccess(String wifiBodelBean) {
                 if (!TextUtils.isEmpty(wifiBodelBean)) {
                     try {
@@ -413,24 +402,18 @@ public class MyHttp {
                         if (wifiBodelBean1.getCode().equals("200")) {
                             if (wifiBodelBean1.getEcho().contains(String.valueOf(i))) {
                                 App.IsWifiModel = wifiBodelBean1.getMode().equals("1");
-                                // System.out.println("leo wifi模式 : " +  App.IsWifiModel);
-                                //System.out.println("leo isWifiModel = "+ App.IsWifiModel);
                             }
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
->>>>>>> eb41a27e5136bb3795c3fe64e4f397861a19849d
+
                     }
                 }
             }
 
             @Override
             public void onError(Throwable throwable, boolean b) {
-<<<<<<< HEAD
-                Toast.makeText(App.context, "获取wifi模式失败" +  App.IsWifiModel, Toast.LENGTH_LONG).show();
-=======
                 System.out.println("leo wifi模式 onError: " + throwable.getMessage());
->>>>>>> eb41a27e5136bb3795c3fe64e4f397861a19849d
             }
 
             @Override
