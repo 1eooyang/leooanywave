@@ -70,4 +70,8 @@ public class WifiBodelBean {
     public void setEcho(String echo) {
         this.echo = echo;
     }
+
+
+
+
 }

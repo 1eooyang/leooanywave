@@ -152,7 +152,7 @@ public class WifiActivity extends Activity {
 
             EventBus.getDefault().post(new ExitAppEvent());
 
-            super.onBackPressed();
+            System.exit(0);
         } else {
             preClickTime = ClickTime;
             Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();

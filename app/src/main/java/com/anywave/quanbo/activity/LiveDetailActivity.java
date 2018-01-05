@@ -165,7 +165,7 @@ public class LiveDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ivNull.setVisibility(View.GONE);
                 long time = System.currentTimeMillis() + (preClickPosition - currentweek) * 24 * 60 * 60 * 1000;
-                getHk(currentid, new SimpleDateFormat("yyyy-MM-dd").format(new Date(time)), preClickPosition);
+                getHk(currentid, new SimpleDateFormat("yyyy-MM-dd").format(new Date(time)), preClickPosition,false);
             }
         });
         contentRecyclerview = (RecyclerView) findViewById(R.id.content_recyclerview);
@@ -320,6 +320,12 @@ public class LiveDetailActivity extends AppCompatActivity {
         });
     }
 
+    public void getHk(final int id, final String date, final int day,boolean aaa) {
+        getHkFromNet(id, date, day);
+    }
+
+
+
     public void getHk(final int id, final String date, final int day) {
 
         if (mapDataBean.get(day) != null) {
@@ -357,69 +363,75 @@ public class LiveDetailActivity extends AppCompatActivity {
         } else {
 //        String url = "http://220.248.15.134:8887/hk/hklist?id=105&d=2017-10-12&pwd=testpwd";
 
-            RequestParams params = new RequestParams(Constants.hk + "?id=" + id + "&d=" + date + "&pwd=testpwd");
-//        RequestParams params = new RequestParams(url);
-            params.setAsJsonContent(true);
-//        params.addHeader("content-type", "application/json");
-            x.http().get(params, new Callback.CommonCallback<String>() {
-                @Override
-                public void onSuccess(String result) {
+            getHkFromNet(id, date, day);
+
+        }
+    }
+
+    private void getHkFromNet(int id, String date, final int day) {
+        RequestParams params = new RequestParams(Constants.hk + "?id=" + id + "&d=" + date + "&pwd=testpwd");
+        //        RequestParams params = new RequestParams(url);
+        params.setAsJsonContent(true);
+        //        params.addHeader("content-type", "application/json");
+        x.http().get(params, new Callback.CommonCallback<String>() {
+            @Override
+            public void onSuccess(String result) {
 
 //                LinearLayoutManager lm = new LinearLayoutManager(App.context);
 //                        final LinearLayoutManager lm = new LinearLayoutManager(LiveDetailActivity.this);
-                    System.out.println("leo result : " + result);
-                    HK2List hkList = new Gson().fromJson(result, HK2List.class);
-                    final List<HK2List.DataBeanX.DataBean> dataBeen = hkList.getData().getData();
+                System.out.println("leo result : " + result);
+                HK2List hkList = new Gson().fromJson(result, HK2List.class);
+                final List<HK2List.DataBeanX.DataBean> dataBeen = hkList.getData().getData();
 
-                    mapDataBean.put(day, dataBeen);
+                mapDataBean.put(day, dataBeen);
 
-                    Log.e(TAG, dataBeen.size() + "onSuccess: " + result);
+                Log.e(TAG, dataBeen.size() + "onSuccess: " + result);
 
 
-                    if (dataBeen.size() <= 0) {
-                        mapivNull.put(day, false);
+                if (dataBeen.size() <= 0) {
+                    mapivNull.put(day, false);
 //                    if (day == currentweek)
-                        ivNull.setVisibility(View.VISIBLE);
-                    } else {
-                        mapivNull.put(day, true);
+                    ivNull.setVisibility(View.VISIBLE);
+                } else {
+                    mapivNull.put(day, true);
 //                    if (day == currentweek)
-                        ivNull.setVisibility(View.GONE);
-                    }
+                    ivNull.setVisibility(View.GONE);
+                }
 
 
-                    final int[] p = {0};
+                final int[] p = {0};
 
 
-                    Log.e(TAG, "run: " + dataBeen.size());
-                    for (int i = 0; i < dataBeen.size(); i++) {
+                Log.e(TAG, "run: " + dataBeen.size());
+                for (int i = 0; i < dataBeen.size(); i++) {
 //                            Log.e(TAG, "onSuccess: "+ dataBeen.get(i).getIsPlaying());
-                        if (dataBeen.get(i).getIsPlaying() == 0) {
+                    if (dataBeen.get(i).getIsPlaying() == 0) {
 //                                Log.e(TAG, "onSuccess: "+ dataBeen.get(i).getIsPlaying() );
-                            if (i >= 2)
-                                i = i - 2;
-                            p[0] = i;
+                        if (i >= 2)
+                            i = i - 2;
+                        p[0] = i;
 //                                if (dataBeen.size() >= 8) {
 //                                    MoveToPosition(lm, p[0]);
 //                                }
-                            break;
-                        }
+                        break;
                     }
+                }
 
 
 //                    contentAdapter = new TvDetialContentAdapter(App.context, dataBeen, day, null);
 
 
-                    contentAdapter.setDate(App.context, dataBeen, day);
-                    contentAdapter.notifyDataSetChanged();
+                contentAdapter.setDate(App.context, dataBeen, day);
+                contentAdapter.notifyDataSetChanged();
 
 //                contentRecyclerview.setAdapter(new TvDetialContentAdapter(App.context, dataBeen, day, null));
 //                contentRecyclerview.scrollToPosition(p[0]);
-                    ((LinearLayoutManager) contentRecyclerview.getLayoutManager())
-                            .scrollToPositionWithOffset(p[0], 0);
+                ((LinearLayoutManager) contentRecyclerview.getLayoutManager())
+                        .scrollToPositionWithOffset(p[0], 0);
 
-                    for (int i = 0; i < 7; i++) {
-                        if (i == day) {
-                            switch (i) {
+                for (int i = 0; i < 7; i++) {
+                    if (i == day) {
+                        switch (i) {
 
 //                            case 0:
 //
@@ -450,39 +462,37 @@ public class LiveDetailActivity extends AppCompatActivity {
 //                                contentRecyclerview6.setAdapter(new TvDetialContentAdapter(App.context, dataBeen, day, null));
 //                                contentRecyclerview6.scrollToPosition( p[0]);
 //                                break;
-                                default:
+                            default:
 
-                                    break;
-                            }
+                                break;
                         }
-
                     }
+
+                }
 
 //                                        contentRecyclerview.scrollToPosition( p[0]);
 
-                }
+            }
 
-                @Override
-                public void onError(Throwable ex, boolean isOnCallback) {
-                    mapivNull.put(day, false);
-                    //                    if (day == currentweek)
-                    ivNull.setVisibility(View.VISIBLE);
-                }
+            @Override
+            public void onError(Throwable ex, boolean isOnCallback) {
+                mapivNull.put(day, false);
+                //                    if (day == currentweek)
+                ivNull.setVisibility(View.VISIBLE);
+            }
 
-                @Override
-                public void onCancelled(CancelledException cex) {
-                    mapivNull.put(day, false);
-                    //                    if (day == currentweek)
-                    ivNull.setVisibility(View.VISIBLE);
-                }
+            @Override
+            public void onCancelled(CancelledException cex) {
+                mapivNull.put(day, false);
+                //                    if (day == currentweek)
+                ivNull.setVisibility(View.VISIBLE);
+            }
 
-                @Override
-                public void onFinished() {
+            @Override
+            public void onFinished() {
 
-                }
-            });
-
-        }
+            }
+        });
     }
 
 
@@ -516,6 +526,12 @@ public class LiveDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            handler = null;
+        }
+
         super.onDestroy();
 
     }
@@ -524,6 +540,11 @@ public class LiveDetailActivity extends AppCompatActivity {
     protected void onStop() {
         // 在OnStop中是release还是suspend播放器，需要看是不是因为按了Home键
         super.onStop();
+        if (handler != null) {
+            handler.removeCallbacksAndMessages(null);
+            //handler = null;
+        }
+
         if (NiceVideoPlayerManager.instance().getCurrentNiceVideoPlayer() != null) {
             mCurrentPosition = NiceVideoPlayerManager.instance().getCurrentNiceVideoPlayer().getCurrentPosition();
         }
@@ -638,6 +659,10 @@ public class LiveDetailActivity extends AppCompatActivity {
                     App.startActivity(this, WifiActivity.class);
                     finish();
                 }
+            } else {
+                if (contentAdapter != null && !App.not_native) {
+                    handler.sendEmptyMessageDelayed(99, 1000);
+                }
             }
         }
 
@@ -652,7 +677,7 @@ public class LiveDetailActivity extends AppCompatActivity {
     /**
      *
      */
-    private static class MyHandler extends Handler {
+    private  class MyHandler extends Handler {
         //对Activity的弱引用
         private final WeakReference<LiveDetailActivity> mActivity;
 
@@ -682,9 +707,7 @@ public class LiveDetailActivity extends AppCompatActivity {
                     break;
                 case 99:
 
-                    if (mNiceVideoPlayer != null) {
-                        mNiceVideoPlayer.seekTo(mCurrentPosition);
-                    }
+                    contentAdapter.reFlashZhiBo();
 
                     break;
                 default:
