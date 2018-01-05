@@ -464,10 +464,6 @@ private boolean isShowed;
         MobclickAgent.onResume(this);
         currentTimeMillis = System.currentTimeMillis();
 
-
-
-
-
      /*   mLoadView.setStatue(LoadingView.LOADING);
         new Thread(new Runnable() {
             @Override
