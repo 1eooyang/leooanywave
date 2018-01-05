@@ -48,7 +48,7 @@ import butterknife.OnClick;
 public class LiveDetailActivity extends AppCompatActivity {
 
     HashMap<Integer, List<HK2List.DataBeanX.DataBean>> mapDataBean = new HashMap();
-    ;
+
 
     @BindView(R.id.day_recyclerview)
     RecyclerView dayRecyclerview;

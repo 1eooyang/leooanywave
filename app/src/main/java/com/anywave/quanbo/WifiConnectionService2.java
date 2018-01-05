@@ -348,11 +348,11 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
 
         String connectWifiSSID = mWifiAdmin.getConnectWifiSSID(this);//当前连接的wifi ssid
 
-        System.out.println("leo ScanWifi : " + connectWifiSSID);
+       // System.out.println("leo ScanWifi : " + connectWifiSSID);
 
         if (Util.isWifi(connectWifiSSID)) {//如果当前
 
-            System.out.println("leo 已经连接了 : " + connectWifiSSID);
+          //  System.out.println("leo 已经连接了 : " + connectWifiSSID);
             mHandler.removeMessages(CHECK_WIFI);
             mHandler.sendEmptyMessageDelayed(CHECK_WIFI, 2000);
 

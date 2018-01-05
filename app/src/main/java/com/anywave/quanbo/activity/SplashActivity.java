@@ -72,7 +72,13 @@ public class SplashActivity extends Activity {
                     @Override
                     public void accept(Long aLong) throws Exception {
                         if (App.isWifi) {
-                            App.startActivity(SplashActivity.this,HomeActivity.class);
+
+                            if (App.isLogin) {
+                                App.startActivity(SplashActivity.this, HomeActivity.class);
+                            } else {
+                                App.startActivity(SplashActivity.this, LoginActivity.class);
+                            }
+
                         } else {
                             App.startActivity(SplashActivity.this,WifiActivity.class);
                         }

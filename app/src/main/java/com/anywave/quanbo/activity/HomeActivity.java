@@ -107,7 +107,7 @@ public class HomeActivity extends Activity {
 
     private Timer timer;
 
-    private static final String TAG = "HomeActivity";
+    private static final String TAG = "leo HomeActivity";
     //    @BindView(R.id.bus)
     //    DragFloatingActionButton bus;
     @BindView(R.id.layout)
@@ -141,6 +141,7 @@ public class HomeActivity extends Activity {
      long ClickTime =  System.currentTimeMillis();
         if (ClickTime - preClickTime < 2000) {
             EventBus.getDefault().post(new ExitAppEvent());
+            App.cleanActivitys();
             System.exit(0);
             //super.onBackPressed();
         } else {

@@ -4,14 +4,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.media.AudioManager;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.DrawableRes;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import static com.xiao.nicevideoplayer.NiceVideoPlayer.STATE_IDLE;
 
@@ -246,6 +242,7 @@ public class TxVideoPlayerController
 
     @Override
     protected void onPlayStateChanged(int playState) {
+        System.out.println("leo onPlayStateChanged : " + playState);
         switch (playState) {
             case STATE_IDLE:
                 loading();

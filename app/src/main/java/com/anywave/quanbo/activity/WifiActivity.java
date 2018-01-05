@@ -60,8 +60,13 @@ public class WifiActivity extends Activity {
         App.currentWifiActivity = this;
         // if (Util.isWifi(getConnectWifiSsid())){
         if (App.isWifi) {
+            if (App.isLogin) {
 
-            App.startActivity(this, HomeActivity.class);
+                App.startActivity(this, HomeActivity.class);
+            } else {
+                App.startActivity(this, LoginActivity.class);
+            }
+
             finish();
         }
         //  }
@@ -110,8 +115,11 @@ public class WifiActivity extends Activity {
 
             App.isWifi = event.isWifiConnect();
             if (App.isWifi) {
-               // MyHttp.getWifiModel();
-                App.startActivity(this, HomeActivity.class);
+                if (App.isLogin) {
+                    App.startActivity(this, HomeActivity.class);
+                } else {
+                    App.startActivity(this, LoginActivity.class);
+                }
                 finish();
             }
         }
@@ -150,7 +158,7 @@ public class WifiActivity extends Activity {
         if (ClickTime - preClickTime < 2000) {
 
             EventBus.getDefault().post(new ExitAppEvent());
-
+                App.cleanActivitys();
             System.exit(0);
         } else {
             preClickTime = ClickTime;

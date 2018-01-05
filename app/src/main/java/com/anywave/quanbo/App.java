@@ -21,6 +21,7 @@ import org.xutils.x;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Timer;
 
@@ -79,6 +80,9 @@ public class App extends Application implements Thread.UncaughtExceptionHandler{
     private Timer timer;
 
     private volatile int mCount = 0;
+
+    private static ArrayList<Activity> mActivitys = new ArrayList<>();
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -107,6 +111,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler{
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+                mActivitys.add(activity);
             }
 
             @Override
@@ -146,7 +151,7 @@ public class App extends Application implements Thread.UncaughtExceptionHandler{
 
             @Override
             public void onActivityDestroyed(Activity activity) {
-                // System.out.println("leo onActivityDestroyed : " +activity.getLocalClassName());
+                mActivitys.remove(activity);
             }
 
 
@@ -158,6 +163,12 @@ public class App extends Application implements Thread.UncaughtExceptionHandler{
 
     }
 
+
+    public static void cleanActivitys(){
+        for (int i = 0; i < mActivitys.size()-1; i++) {
+            mActivitys.get(i).finish();
+        }
+    }
 
         @Override
     public void onTerminate() {

@@ -28,6 +28,13 @@ public class ClickLoginActivity extends Activity {
         ButterKnife.bind(this);
     }
 
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(ClickLoginActivity.this, LoginActivity.class));
+        finish();
+    }
+
     @OnClick({R.id.back, R.id.tv_click_login, R.id.ll_save})
     public void onViewClicked(View view) {
         switch (view.getId()) {

@@ -1,23 +1,23 @@
 package com.anywave.quanbo.activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.anywave.quanbo.App;
 import com.anywave.quanbo.R;
+import com.anywave.quanbo.event.ExitAppEvent;
 import com.anywave.quanbo.http.Constants;
 import com.anywave.quanbo.http.MyHttp;
 import com.anywave.quanbo.utils.MyToast;
 
+import org.greenrobot.eventbus.EventBus;
 import org.xutils.common.Callback;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -28,8 +28,8 @@ import butterknife.OnClick;
 
 public class LoginActivity extends Activity {
     private static final String TAG = "LoginActivity";
-    @BindView(R.id.ib_close)
-    ImageButton ibClose;
+   /* @BindView(R.id.ib_close)
+    ImageButton ibClose;*/
     @BindView(R.id.tv_login_code)
     TextView tvLoginCode;
     @BindView(R.id.tv_login_pw)
@@ -56,6 +56,7 @@ public class LoginActivity extends Activity {
     TextView tvHint;
     @BindView(R.id.tv_look)
     TextView tvLook;
+    private long preClickTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,14 +66,28 @@ public class LoginActivity extends Activity {
     }
 
 
-    @OnClick({R.id.ib_close, R.id.tv_login_code, R.id.tv_login_pw, R.id.tv_obtain_code, R.id.tv_login, R.id.tv_look,R.id.fl_pw,R.id.tv_login_pw_in})
+    @Override
+    public void onBackPressed() {
+        long ClickTime =  System.currentTimeMillis();
+        if (ClickTime - preClickTime < 2000) {
+
+            EventBus.getDefault().post(new ExitAppEvent());
+            App.cleanActivitys();
+            System.exit(0);
+        } else {
+            preClickTime = ClickTime;
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @OnClick({R.id.tv_login_code, R.id.tv_login_pw, R.id.tv_obtain_code, R.id.tv_login, R.id.tv_look,R.id.fl_pw,R.id.tv_login_pw_in})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
 
-            case R.id.ib_close:
+          /*  case R.id.ib_close:
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
-                break;
+                break;*/
             case R.id.tv_login_code:
                 tvCode.setText("验证码");
                 tvObtainCode.setVisibility(View.VISIBLE);
@@ -208,6 +223,7 @@ public class LoginActivity extends Activity {
             case R.id.tv_look:
 
                 App.startActivity(this,HomeActivity.class);
+                finish();
                 break;
         }
     }

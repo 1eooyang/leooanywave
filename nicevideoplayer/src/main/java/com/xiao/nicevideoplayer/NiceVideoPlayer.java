@@ -203,6 +203,7 @@ public class NiceVideoPlayer extends FrameLayout
         } else if (mCurrentState == STATE_COMPLETED || mCurrentState == STATE_ERROR) {
             mMediaPlayer.reset();
             openMediaPlayer(0);
+            LogUtil.d("STATE_COMPLETED");
         } else {
             LogUtil.d("NiceVideoPlayer在mCurrentState == " + mCurrentState + "时不能调用restart()方法.");
         }
@@ -463,6 +464,7 @@ public class NiceVideoPlayer extends FrameLayout
                 LogUtil.e("打开播放器发生错误2", e2);
             }
         } catch (Exception e) {
+            LogUtil.e("打开播放器发生错误2", e);
             e.printStackTrace();
         }
     }

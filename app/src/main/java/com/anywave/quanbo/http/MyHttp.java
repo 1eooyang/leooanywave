@@ -35,7 +35,7 @@ import okhttp3.Response;
 
 public class MyHttp {
 
-    private static final String TAG = "MyHttp";
+    private static final String TAG = "leo";
 
 
     //  public static void getHkList(){
@@ -242,7 +242,7 @@ public class MyHttp {
                         Log.e(TAG, "postLogin: " + "TName:" + headerName + "Value:" + headerValue);
 
                         if (headerName.equals("x-auth-token")) {
-                            App.sp.edit().putString("token", headerValue).commit();
+                            App.sp.edit().putString("token", headerValue).apply();
 
                             App.token = headerValue;
                             Log.e(TAG, "App.token: " + "TName:" + headerName + "Value:" + headerValue);
@@ -361,11 +361,11 @@ public class MyHttp {
     private static boolean haveRequested;
 
     public static void getWifiModel() {
-      /*  if (haveRequested) {
+        if (haveRequested) {
             return;
-        }*/
+        }
         System.out.println("leo getWifiModel");
-        haveRequested = true;
+
 
  /*       WifiBodelBean wifiBodelBean1 = new Gson().fromJson("{\"code\":\"200\",\"echo\":\"echo9\",\"gw_mac\":\"94:40:a2:1a:07:bc\",\"umac\":\"60:6d:c7:1c:96:85\",\"uip\":\"192.168.0.35\",\"mode\":\"0\"}", WifiBodelBean.class);
      //   System.out.println("leo wifi模式Bean " + wifiBodelBean);
@@ -401,6 +401,7 @@ public class MyHttp {
                         if (wifiBodelBean1.getCode().equals("200")) {
                             if (wifiBodelBean1.getEcho().contains(String.valueOf(i))) {
                                 App.IsWifiModel = wifiBodelBean1.getMode().equals("1");
+                                haveRequested = true;
                               /*  if (App.IsWifiModel) {
                                     Toast.makeText(App.context, "切换到WIFI模式", Toast.LENGTH_LONG).show();
                                 } else {
