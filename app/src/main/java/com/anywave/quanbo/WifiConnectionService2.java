@@ -191,10 +191,9 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
     public void AppExited(ExitAppEvent event) {//如果是wifi模式下  用户手动退出APP  那么需要忘记我们的WIFI密码
         System.out.println("leo Event 退出APP");
         mHandler.removeCallbacksAndMessages(null);
-        if (App.IsWifiModel && mWifiAdmin != null) {
+        if (!App.IsWifiModel && mWifiAdmin != null) {
             mWifiAdmin.forget();
         }
-
     }
 
 
@@ -352,7 +351,7 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
         System.out.println("leo ScanWifi : " + connectWifiSSID);
 
         if (Util.isWifi(connectWifiSSID)) {//如果当前
-            MyHttp.getWifiModel();
+
             System.out.println("leo 已经连接了 : " + connectWifiSSID);
             mHandler.removeMessages(CHECK_WIFI);
             mHandler.sendEmptyMessageDelayed(CHECK_WIFI, 2000);
@@ -483,7 +482,7 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
             unregisterReceiver(mWifiOnOffRecever);
         }
 
-        if (App.IsWifiModel && mWifiAdmin != null) {
+        if (!App.IsWifiModel && mWifiAdmin != null) {
             mWifiAdmin.forget();
         }
 

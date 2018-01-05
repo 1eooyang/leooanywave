@@ -18,7 +18,6 @@ import com.anywave.quanbo.R;
 import com.anywave.quanbo.event.ExitAppEvent;
 import com.anywave.quanbo.event.PermissionEvent;
 import com.anywave.quanbo.event.WifiStateEvent;
-import com.anywave.quanbo.http.MyHttp;
 import com.anywave.quanbo.utils.PermissionUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -111,7 +110,7 @@ public class WifiActivity extends Activity {
 
             App.isWifi = event.isWifiConnect();
             if (App.isWifi) {
-                MyHttp.getWifiModel();
+               // MyHttp.getWifiModel();
                 App.startActivity(this, HomeActivity.class);
                 finish();
             }

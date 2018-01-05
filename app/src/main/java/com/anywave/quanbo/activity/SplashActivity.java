@@ -15,7 +15,6 @@ import com.anywave.quanbo.App;
 import com.anywave.quanbo.R;
 import com.anywave.quanbo.WifiConnectionService2;
 import com.anywave.quanbo.event.WifiStateEvent;
-import com.anywave.quanbo.http.MyHttp;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -92,9 +91,9 @@ public class SplashActivity extends Activity {
         } else {
 
             App.isWifi = event.isWifiConnect();
-            if (App.isWifi) {
+           /* if (App.isWifi) {
                 MyHttp.getWifiModel();
-            }
+            }*/
         }
 
 

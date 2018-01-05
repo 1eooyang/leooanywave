@@ -362,9 +362,9 @@ public class MyHttp {
     private static boolean haveRequested;
 
     public static void getWifiModel() {
-        if (haveRequested) {
+      /*  if (haveRequested) {
             return;
-        }
+        }*/
         System.out.println("leo getWifiModel");
         haveRequested = true;
 
@@ -402,6 +402,11 @@ public class MyHttp {
                         if (wifiBodelBean1.getCode().equals("200")) {
                             if (wifiBodelBean1.getEcho().contains(String.valueOf(i))) {
                                 App.IsWifiModel = wifiBodelBean1.getMode().equals("1");
+                              /*  if (App.IsWifiModel) {
+                                    Toast.makeText(App.context, "切换到WIFI模式", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(App.context, "切换到非WIFI模式", Toast.LENGTH_LONG).show();
+                                }*/
                             }
                         }
                     } catch (Exception e) {
@@ -413,7 +418,7 @@ public class MyHttp {
 
             @Override
             public void onError(Throwable throwable, boolean b) {
-                System.out.println("leo wifi模式 onError: " + throwable.getMessage());
+              //  Toast.makeText(App.context, "没有收到wifi模式切换信息 默认wifi模式", Toast.LENGTH_LONG).show();
             }
 
             @Override

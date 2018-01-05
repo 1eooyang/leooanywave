@@ -40,7 +40,6 @@ import com.anywave.quanbo.bean.PlayList;
 import com.anywave.quanbo.event.ExitAppEvent;
 import com.anywave.quanbo.event.WifiStateEvent;
 import com.anywave.quanbo.http.Constants;
-import com.anywave.quanbo.http.MyHttp;
 import com.anywave.quanbo.utils.Util;
 import com.anywave.quanbo.view.dragbutton.SuspendButtonLayout;
 import com.google.gson.Gson;
@@ -181,7 +180,7 @@ public class HomeActivity extends Activity {
                 //}
             } else {
 
-                MyHttp.getWifiModel();
+              //  MyHttp.getWifiModel();
 
 
                /* if (!App.IsWifiModel) {
