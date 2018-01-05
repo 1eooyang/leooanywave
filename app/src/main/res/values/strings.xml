@@ -12,7 +12,7 @@
     <string name="wifi3">WWKJ-WIFI</string>
     <string name="wifi4">WWKJ-5G</string>
     <string name="click_to_refresh"><Data><![CDATA[网络连接失败，点击<font color="#2AC2EF">重试</font>]]></Data></string>
-    <string name="catg_refreshing">正在进入Qpop智能系统&#8230;</string>
+    <string name="catg_refreshing">正在进入全播智能系统&#8230;</string>
 
 
     <string name="permission_get_accounts_hint">没有此权限，无法正常收看节目，请开启权限。PERMISSION_GET_ACCOUNTS</string>

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.widget.Toast;
 
 import com.anywave.quanbo.App;
 import com.anywave.quanbo.R;
@@ -87,7 +86,7 @@ public class SplashActivity extends Activity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void WifiConnected(WifiStateEvent event) {
         if (event.isStartConnectWifi()) {
-            Toast.makeText(App.context, "开始连接wifi", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(App.context, "开始连接wifi", Toast.LENGTH_SHORT).show();
         } else {
 
             App.isWifi = event.isWifiConnect();

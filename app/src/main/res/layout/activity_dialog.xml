@@ -30,7 +30,7 @@
             android:layout_marginRight="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="退出账号将收不到到站提醒和精彩节目预告。确定要退出Qpop吗？"
+            android:text="退出账号将收不到到站提醒和精彩节目预告。确定要退出全播吗？"
             android:textColor="#FF030303"
             android:textSize="13sp"
             />

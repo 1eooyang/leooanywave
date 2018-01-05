@@ -236,7 +236,7 @@ public class PermissionUtils {
         final String requestPermission = requestPermissions[requestCode];
         if (ActivityCompat.checkSelfPermission(activity, requestPermission) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, requestPermission)) {
-                Snackbar snackbar = Snackbar.make(mLayout, "提示：Qpop缺少权限不能正常连接Wifi,请点击\"授权\".否则将无法正常收看视频!",
+                Snackbar snackbar = Snackbar.make(mLayout, "提示：全播缺少权限不能正常连接Wifi,请点击\"授权\".否则将无法正常收看视频!",
                         Snackbar.LENGTH_INDEFINITE)
                         .setAction("OK", new View.OnClickListener() {
                             @Override
@@ -282,7 +282,7 @@ public class PermissionUtils {
         } else {
 
             new AlertDialog.Builder(activity).setTitle("温馨提示：")
-                    .setMessage("Qpop缺少定位权限不能正常连接Wifi,请点击\"授权\".否则将无法正常收看视频!")
+                    .setMessage("全播缺少定位权限不能正常连接Wifi,请点击\"授权\".否则将无法正常收看视频!")
                     .setNegativeButton("授权", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
