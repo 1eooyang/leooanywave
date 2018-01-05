@@ -301,12 +301,12 @@ public class HomeActivity extends Activity {
         lvLive.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, final int i, long l) {
-             /*   if (!App.isLogin) {
+                if (!App.isLogin) {
                     App.startActivity(HomeActivity.this, DialogLoginActivity.class);
-                } else {*/
+                } else {
                     position = i;
                     startToLiveDetail(position);
-               //}
+               }
             }
         });
 
