@@ -175,8 +175,7 @@ public class MyHttp {
                     Log.e(TAG, "postLogin: " + "TName:" + headerName + "Value:" + headerValue);
 
                     if (headerName.equals("x-auth-token")) {
-                        App.sp.edit().putString("token", headerValue).commit();
-                        ;
+                        App.sp.edit().putString("token", headerValue).apply();
                         App.token = headerValue;
                         Log.e(TAG, "App.token: " + "TName:" + headerName + "Value:" + headerValue);
                         break;

@@ -106,12 +106,7 @@ public class SplashActivity extends Activity {
             jump();
         }
 
-
-
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-
-
     }
 
     @Override
