@@ -66,6 +66,9 @@ public class NiceVideoPlayer extends FrameLayout
      **/
     public static final int STATE_COMPLETED = 7;
 
+
+    public static final int STATE_WIFIDIS = 8;
+
     /**
      * 普通模式
      **/
@@ -190,6 +193,8 @@ public class NiceVideoPlayer extends FrameLayout
 
     @Override
     public void restart() {
+
+        LogUtil.d("restart");
         if (mCurrentState == STATE_PAUSED) {
             mMediaPlayer.start();
             mCurrentState = STATE_PLAYING;
@@ -200,11 +205,15 @@ public class NiceVideoPlayer extends FrameLayout
             mCurrentState = STATE_BUFFERING_PLAYING;
             mController.onPlayStateChanged(mCurrentState);
             LogUtil.d("STATE_BUFFERING_PLAYING");
-        } else if (mCurrentState == STATE_COMPLETED || mCurrentState == STATE_ERROR) {
+        } else if (mCurrentState == STATE_COMPLETED) {
             mMediaPlayer.reset();
             openMediaPlayer(0);
             LogUtil.d("STATE_COMPLETED");
-        } else {
+        } else if(mCurrentState == STATE_ERROR){
+            mMediaPlayer.reset();
+            openMediaPlayer(0);
+            LogUtil.d("STATE_ERROR3");
+        }else{
             LogUtil.d("NiceVideoPlayer在mCurrentState == " + mCurrentState + "时不能调用restart()方法.");
         }
     }
@@ -443,9 +452,12 @@ public class NiceVideoPlayer extends FrameLayout
             mMediaPlayer.prepareAsync();
             mCurrentState = STATE_PREPARING;
             mController.onPlayStateChanged(mCurrentState);
-            LogUtil.d("STATE_PREPARING");
+            LogUtil.d("STATE_PREPARING1");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+            if (!Util.isWifiConnect(mContext)) {
+                mController.onPlayStateChanged(STATE_ERROR);
+            }
             LogUtil.e("文件没找到", e);
         } catch (IOException e) {
 
@@ -458,13 +470,23 @@ public class NiceVideoPlayer extends FrameLayout
                 mMediaPlayer.prepareAsync();
                 mCurrentState = STATE_PREPARING;
                 mController.onPlayStateChanged(mCurrentState);
-                LogUtil.d("STATE_PREPARING");
+                LogUtil.d("STATE_PREPARING2");
             } catch (IOException e2) {
                 e.printStackTrace();
+
+                if (!Util.isWifiConnect(mContext)) {
+                    mController.onPlayStateChanged(STATE_ERROR);
+                }
+                //  }
                 LogUtil.e("打开播放器发生错误2", e2);
             }
         } catch (Exception e) {
-            LogUtil.e("打开播放器发生错误2", e);
+
+            if (!Util.isWifiConnect(mContext)) {
+                mController.onPlayStateChanged(STATE_ERROR);
+            }
+
+            LogUtil.e("打开播放器发生错误3", e);
             e.printStackTrace();
         }
     }
@@ -486,17 +508,18 @@ public class NiceVideoPlayer extends FrameLayout
             = new IMediaPlayer.OnPreparedListener() {
         @Override
         public void onPrepared(IMediaPlayer mp) {
+            LogUtil.d("leo onPrepared ——> STATE_PREPARED");
             mCurrentState = STATE_PREPARED;
             mController.onPlayStateChanged(mCurrentState);
-            LogUtil.d("leo onPrepared ——> STATE_PREPARED");
             mp.start();
             // 从上次的保存位置播放
-            if (continueFromLastPosition) {
-                long savedPlayPosition = NiceUtil.getSavedPlayPosition(mContext, mUrl);
-                mp.seekTo(savedPlayPosition);
+           // if (continueFromLastPosition) {
+              /*  long savedPlayPosition = NiceUtil.getSavedPlayPosition(mContext, mUrl);
+                NiceUtil.savePlayPosition(mContext, mUrl,0);
+                mp.seekTo(savedPlayPosition);*/
                 //hxp
                // mp.seekTo(0);
-            }
+         //   }
             // 跳到指定位置播放
             if (skipToPosition != 0) {
                 mp.seekTo(skipToPosition);
@@ -517,9 +540,9 @@ public class NiceVideoPlayer extends FrameLayout
             = new IMediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(IMediaPlayer mp) {
+            LogUtil.d("onCompletion ——> STATE_COMPLETED");
             mCurrentState = STATE_COMPLETED;
             mController.onPlayStateChanged(mCurrentState);
-            LogUtil.d("onCompletion ——> STATE_COMPLETED");
             // 清除屏幕常亮
             mContainer.setKeepScreenOn(false);
         }
@@ -728,9 +751,11 @@ public class NiceVideoPlayer extends FrameLayout
     public void release() {
         // 保存播放位置
         if (isPlaying() || isBufferingPlaying() || isBufferingPaused() || isPaused()) {
-            NiceUtil.savePlayPosition(mContext, mUrl, getCurrentPosition());
+            skipToPosition =  getCurrentPosition();
+          //  NiceUtil.savePlayPosition(mContext, mUrl, getCurrentPosition());
         } else if (isCompleted()) {
-            NiceUtil.savePlayPosition(mContext, mUrl, 0);
+            skipToPosition = 0;
+          //  NiceUtil.savePlayPosition(mContext, mUrl, 0);
         }
         // 退出全屏或小窗口
         if (isFullScreen()) {

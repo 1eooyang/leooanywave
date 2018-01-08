@@ -101,6 +101,7 @@ public class LiveDetailActivity extends AppCompatActivity {
     private int num;
     private static long mCurrentPosition;
     private int preClickPosition;
+    private int retryTime;
 
     private void MoveToPosition(LinearLayoutManager manager, int n) {
         manager.scrollToPositionWithOffset(n, 0);
@@ -633,10 +634,16 @@ public class LiveDetailActivity extends AppCompatActivity {
     public void onViewPlayClicked() {
     }
 
-
+private volatile String lastPlayUrl;
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void Event(final Playbean event) {
+    public synchronized void Event(final Playbean event) {
+      /*  if (lastPlayUrl != null) {
+            if (lastPlayUrl.equals(event.getUrl())) {
+                return;
+            }
+        }*/
         System.out.println("leo PlaybeanEvent : " + event.toString());
+        lastPlayUrl = event.getUrl();
         App.currentbacktime = 0;
         if (event.getUrl() == null || event.getUrl().trim().equals("")) {
             play(this.liveUrl, 0);
@@ -674,6 +681,8 @@ public class LiveDetailActivity extends AppCompatActivity {
         }*/
     }
 
+    //private int times
+
     /**
      *
      */
@@ -696,6 +705,7 @@ public class LiveDetailActivity extends AppCompatActivity {
                 case 1:
                     Log.d("leo", "************************************");
                     Log.d("leo", "replay");
+
                     Log.d("leo", "************************************");
 
                     String url = msg.getData().getString("url");

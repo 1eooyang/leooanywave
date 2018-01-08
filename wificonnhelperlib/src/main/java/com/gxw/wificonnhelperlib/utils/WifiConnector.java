@@ -25,11 +25,9 @@ import android.net.wifi.SupplicantState;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import android.widget.Toast;
 
 import com.gxw.wificonnhelperlib.utils.bean.WifiBeanConn;
 
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -249,15 +247,15 @@ public class WifiConnector {
         //添加新的网络配置
         WifiConfiguration cfg = new WifiConfiguration();
 
-        Random random = new Random();
+       /* Random random = new Random();
         boolean b = random.nextBoolean();
         if (b) {
             cfg.SSID = "\"" + "Qpop_1" + "\"";
         } else {
             cfg.SSID = "\"" + "Qpop_2 "+ "\"";
-        }
+        }*/
 
-        //cfg.SSID = "\"" + wifiBeanConn.getScanResult().SSID + "\"";
+        cfg.SSID = "\"" + wifiBeanConn.getScanResult().SSID + "\"";
         WifiSecurityMode securityMode = wifiAdmin.secretMode(wifiBeanConn.getScanResult());
         if (securityMode == WifiSecurityMode.WEP) {
             cfg.wepKeys[0] = "\"" + wifiBeanConn.getPassword() + "\"";

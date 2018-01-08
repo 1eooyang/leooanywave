@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 
 import com.anywave.quanbo.App;
@@ -141,10 +143,11 @@ public class Util {
 
         String s = wifistr.replaceAll("\"", "");
 
-        return s.equals(wifi1) || s.equals(wifi2);
+        return s.contains(wifi); //|| s.equals(wifi2);
     }
 
     private static final String wifi1 = App.context.getString(R.string.wifi1);
+    private static final String wifi= "Qpop";
     private static final String wifi2 = App.context.getString(R.string.wifi2);
 
 
@@ -167,7 +170,12 @@ public class Util {
         //    System.out.println("leo3 wifistr = " + wifistr);
         return wifistr.toLowerCase().contains(wifi1.toLowerCase());
     }
-
+    public static boolean isWifiConnect() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) App.context
+                .getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetInfo != null && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI;
+    }
 
     public static String getAppVersionName(Context context) {
         String versionName = "";

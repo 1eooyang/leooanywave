@@ -403,6 +403,8 @@ public class WifiConnectionService2 extends Service implements WifiConnListener 
 
             mHandler.sendEmptyMessageDelayed(SCAN_WIFI, 2000);
 
+            EventBus.getDefault().post(WifiStateEvent.getInstance(false));
+
             //  }
 
 

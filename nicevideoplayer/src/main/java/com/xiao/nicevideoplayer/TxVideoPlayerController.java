@@ -98,18 +98,18 @@ public class TxVideoPlayerController
 
     private boolean hasRegisterBatteryReceiver; // 是否已经注册了电池广播
 
-    public TxVideoPlayerController(Context context, Handler handler,String url,long position) {
+    public TxVideoPlayerController(Context context, Handler handler, String url, long position) {
         super(context);
         mContext = context;
         this.handler = handler;
         this.url = url;
-        if (position==0) {
+        if (position == 0) {
             lastposition = 0;
         }
         init();
     }
 
-    public void showProgress(boolean isShow){
+    public void showProgress(boolean isShow) {
 
         if (isShow) {
             mSeek.setVisibility(VISIBLE);
@@ -118,7 +118,7 @@ public class TxVideoPlayerController
             mLine.setVisibility(VISIBLE);
             mDuration.setVisibility(VISIBLE);
 
-        }else {
+        } else {
             mSeek.setVisibility(INVISIBLE);
             mRestartPause.setVisibility(INVISIBLE);
             mPosition.setVisibility(INVISIBLE);
@@ -282,16 +282,16 @@ public class TxVideoPlayerController
             case NiceVideoPlayer.STATE_ERROR:
                 cancelUpdateProgressTimer();
                 setTopBottomVisible(false);
-//                error_times++;
-//                if (error_times>=4) {
-//                    Message message = new Message();
-//                    message.what = 1;
-//                    Bundle bundle =  new Bundle();
-//                    bundle.putString("url",url);
-//                    message.setData(bundle);
-//                } else {
-//
-//                }
+                //                error_times++;
+                //                if (error_times>=4) {
+                //                    Message message = new Message();
+                //                    message.what = 1;
+                //                    Bundle bundle =  new Bundle();
+                //                    bundle.putString("url",url);
+                //                    message.setData(bundle);
+                //                } else {
+                //
+                //                }
                 //mTop.setVisibility(View.VISIBLE);
                 //mError.setVisibility(View.VISIBLE);
 
@@ -307,6 +307,12 @@ public class TxVideoPlayerController
                 mRetry.performClick();
                 //hxp
                 loading();
+                break;
+
+
+            case NiceVideoPlayer.STATE_WIFIDIS:
+                //网络不是wifi模式
+
                 break;
         }
     }
@@ -445,8 +451,8 @@ public class TxVideoPlayerController
             } else if (mNiceVideoPlayer.isFullScreen()) {
                 mNiceVideoPlayer.exitFullScreen();
             }
-        }else if (v == mVol) {
-            if (mNiceVideoPlayer.getVolume()==0) {
+        } else if (v == mVol) {
+            if (mNiceVideoPlayer.getVolume() == 0) {
                 mNiceVideoPlayer.setVolume(10);
                 mVol.setImageResource(R.drawable.live_icon_detail_vol);
             } else {
@@ -554,6 +560,8 @@ public class TxVideoPlayerController
             mNiceVideoPlayer.restart();
         }
         long position = (long) (mNiceVideoPlayer.getDuration() * seekBar.getProgress() / 100f);
+        LogUtil.d("seekTo : position = " + position);
+
         mNiceVideoPlayer.seekTo(position);
         startDismissTopBottomTimer();
     }
@@ -562,30 +570,31 @@ public class TxVideoPlayerController
     protected void updateProgress() {
 
         long position = mNiceVideoPlayer.getCurrentPosition();
-
-        if (lastposition==0 && isfirst) {
+        LogUtil.d("updateProgress : position = " + position + "  lastposition = " + lastposition);
+        if (lastposition == 0 && isfirst) {
             lastposition = position;
             isfirst = false;
-        } else if (lastposition==position) {
+        } else if (lastposition == position) {
             reset();
             Message message = new Message();
             message.what = 1;
-            Bundle bundle =  new Bundle();
-            bundle.putString("url",url);
+            Bundle bundle = new Bundle();
+            bundle.putString("url", url);
             long duration = mNiceVideoPlayer.getDuration();
-            if (lastposition>duration) {
-                lastposition=0;
-                bundle.putLong("position",0);
+            LogUtil.d("updateProgress : getDuration = " + duration);
+            if (lastposition > duration) {
+                lastposition = 0;
+                bundle.putLong("position", 0);
             } else {
-                long rest = (duration - position)/10;
-                if (rest<=0) {
-                    bundle.putLong("position",0);
+                long rest = (duration - position) / 10;
+                if (rest <= 0) {
+                    bundle.putLong("position", 0);
                 } else {
                     long abc = 1000;
-                    if (rest<=abc) {
-                        bundle.putLong("position",lastposition+rest);
+                    if (rest <= abc) {
+                        bundle.putLong("position", lastposition + rest);
                     } else {
-                        bundle.putLong("position",lastposition+abc);
+                        bundle.putLong("position", lastposition + abc);
                     }
                 }
             }
@@ -603,7 +612,7 @@ public class TxVideoPlayerController
         mPosition.setText(NiceUtil.formatTime(position));
         mDuration.setText(NiceUtil.formatTime(duration));
         //更新时间
-        if (position!=0) {
+        if (position != 0) {
             lastposition = position;
         }
 
